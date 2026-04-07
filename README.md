@@ -4,8 +4,8 @@ Kumpulan latihan untuk memperdalam fundamental CSS berdasarkan kurikulum [The Od
 
 ## Progress Latihan
 - [x] `intro-to-css` - Syntax dasar dan cara menghubungkan CSS.
-- [ ] `cascade` - Memahami Specificity dan Inheritance.
-- [ ] `block-and-inline` - Eksplorasi Box Model.
+- [x] `cascade` - Memahami Specificity dan Inheritance.
+- [x] `block-and-inline` - Eksplorasi Box Model.
 - [ ] `flex` - Teknik layouting responsif.
 
 ## Cara Menjalankan
