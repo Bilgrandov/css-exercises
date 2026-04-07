@@ -1,0 +1,198 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 40px;
+    background-color: #f8f9fa;
+    color: #333;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.task-section {
+    padding: 30px 0;
+}
+
+h2 {
+    color: #2c3e50;
+    margin-bottom: 10px;
+}
+
+hr {
+    border: 0.5px solid #ddd;
+}
+
+button {
+    cursor: pointer;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-weight: bold;
+}
+
+/* ========================================== */
+/* TUGAS 1: Sidebar Layout                    */
+/* ========================================== */
+
+.sidebar-container {
+    background-color: #eee;
+    height: 150px;
+    border: 2px dashed #ccc;
+    display: flex;
+    /* 1. Jadikan flex container */
+}
+
+.sidebar {
+    background-color: #3498db;
+    color: white;
+    padding: 20px;
+    width: 200px;
+    /* flex-shrink: 0; */
+    /* 2. Berikan lebar tetap 200px */
+    /* 3. Pastikan tidak menyusut (flex-shrink: 0) */
+}
+
+.main-content {
+    background-color: #fff;
+    padding: 20px;
+    flex: 1;
+    /* 4. Berikan flex: 1 agar memenuhi sisa ruang */
+}
+
+
+/* ========================================== */
+/* TUGAS 2: Photo Grid (Wrapping)             */
+/* ========================================== */
+
+.grid-container {
+    background-color: #eee;
+    padding: 20px;
+    border: 2px dashed #ccc;
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    /* 1. Jadikan flex container */
+    /* 2. Berikan gap: 16px */
+    /* 3. Izinkan membungkus ke baris baru (wrap) */
+}
+
+.photo {
+    width: 150px;
+    height: 150px;
+    background-color: #e67e22;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    font-weight: bold;
+    border-radius: 8px;
+}
+
+
+/* ========================================== */
+/* TUGAS 3: Centered Hero Section             */
+/* ========================================== */
+
+.hero-container {
+    background-color: #2c3e50;
+    color: white;
+    height: 400px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* 1. Jadikan flex container */
+    /* 2. Letakkan konten tepat di tengah (horizontal & vertikal) */
+}
+
+.hero-content {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    /* 3. Jadikan flex container bertumpuk vertikal (column) */
+    /* 4. Berikan gap: 20px */
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    /* 5. Berikan display: flex dan gap: 16px */
+    /* 6. Ratakan tombol-tombol agar ke tengah */
+}
+
+.primary {
+    background-color: #e74c3c;
+    color: white;
+}
+
+.secondary {
+    background-color: #ecf0f1;
+    color: #2c3e50;
+}
+
+
+/* ========================================== */
+/* TUGAS 4: Build It Yourself (Comment Section)*/
+/* ========================================== */
+
+.comment-practice-area {
+    background-color: #fff;
+    padding: 20px;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    min-height: 100px;
+}
+
+/* TULIS CSS ANDA SENDIRI DI SINI */
+.my-comment {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.avatar-circle {
+    width: 50px;
+    height: 50px;
+    background-color: #e67e22;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    font-weight: bold;
+    border-radius: 50%;
+}
+
+.comment-body {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.user {
+    font-weight: bold;
+}
+
+.comment-text {
+    font-size: 14px;
+}
+
+.heart-icon {
+    font-size: 24px;
+}
+
+/* Ingat:
+   - Gunakan Flexbox untuk membagi area Kiri, Tengah, dan Kanan.
+   - Gunakan align-items: center agar semuanya sejajar vertikal.
+*/
+
+.back-btn {
+    margin-top: 50px;
+    width: 100%;
+}

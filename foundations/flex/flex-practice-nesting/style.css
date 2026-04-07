@@ -1,0 +1,59 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 40px;
+    background-color: #f0f2f5;
+    color: #333;
+}
+
+.header-text {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+/* KARTU CSS DASAR (TIDAK PERLU DIUBAH) */
+.card {
+    background-color: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 250px;
+}
+
+.avatar {
+    width: 100px;
+    height: 100px;
+    background-color: #6a1b9a;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+h3 {
+    margin: 10px 0 5px 0;
+}
+
+p {
+    color: #666;
+    font-size: 14px;
+}
+
+/* ========================================== */
+/* TUGAS ANDA DI BAWAH INI:                   */
+/* ========================================== */
+
+.container {
+    /* 1. Jadikan flex container agar kartu berjejer horizontal */
+    display: flex;
+    /* 2. Berikan jarak antar kartu (gap) */
+    gap: 32px;
+    /* 3. Ratakan semua kartu ke tengah layar */
+    justify-content: center;
+}
+
+.card {
+    /* 4. Jadikan flex container agar isinya menumpuk vertikal */
+    display: flex;
+    /* 5. Atur direction agar menjadi kolom */
+    flex-direction: column;
+    /* 6. Ratakan semua isi di dalamnya ke tengah kartu secara horizontal */
+    align-items: center;
+}
