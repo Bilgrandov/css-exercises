@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grid Responsive — Layout Responsif Tanpa Media Queries</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <a href="../../../index.html" class="back-link">← Kembali ke Daftar Exercise</a>
+
+    <header class="page-header">
+        <h1>📱 Grid Responsive</h1>
+        <p class="subtitle">Layout responsif dengan <code>auto-fill</code>, <code>auto-fit</code>, dan <code>minmax()</code></p>
+    </header>
+
+    <!-- TEORI -->
+    <section class="theory">
+        <h2>📖 Responsif Tanpa Media Queries?!</h2>
+        <p>CSS Grid punya kemampuan luar biasa — membuat layout yang <strong>otomatis menyesuaikan</strong> jumlah kolom berdasarkan lebar layar, TANPA menulis satu pun media query!</p>
+
+        <div class="concept-box">
+            <h3>Resep Ajaibnya</h3>
+            <pre style="color: #a5d6a7; font-family: 'Fira Code', monospace; font-size: 0.9em;">
+grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            </pre>
+            <p style="margin-top: 10px;">Artinya: "Buat sebanyak mungkin kolom, masing-masing minimal 250px. Jika ada ruang sisa, bagikan merata."</p>
+        </div>
+
+        <div class="concept-box">
+            <h3>auto-fill vs auto-fit</h3>
+            <ul>
+                <li><code>auto-fill</code> — Buat kolom sebanyak mungkin, termasuk kolom kosong (track ada tapi tidak terlihat)</li>
+                <li><code>auto-fit</code> — Sama, tapi kolom kosong akan di-<em>collapse</em> (item yang ada melar mengisi ruang)</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- DEMO 1: auto-fill -->
+    <section class="demo-section">
+        <h2>🎯 Demo 1: auto-fill — Kolom Otomatis</h2>
+        <p>Coba <strong>resize browser</strong> kamu! Kolom akan otomatis bertambah/berkurang.</p>
+
+        <div class="demo-container grid-autofill">
+            <div class="grid-item">Card 1</div>
+            <div class="grid-item">Card 2</div>
+            <div class="grid-item">Card 3</div>
+            <div class="grid-item">Card 4</div>
+            <div class="grid-item">Card 5</div>
+            <div class="grid-item">Card 6</div>
+            <div class="grid-item">Card 7</div>
+            <div class="grid-item">Card 8</div>
+        </div>
+
+        <div class="code-block">
+            <h4>CSS:</h4>
+            <pre><code>.container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 16px;
+}
+
+/* auto-fill: buat kolom sebanyak mungkin
+   minmax(200px, 1fr): minimal 200px, max 1fr
+   Hasilnya: responsif otomatis! */</code></pre>
+        </div>
+
+        <div class="explanation">
+            <p>✅ <strong>Bagaimana ini bekerja?</strong> Browser menghitung: "Berapa kolom 200px yang muat?" Jika layar 800px → 4 kolom. Jika 600px → 3 kolom. Jika 400px → 2 kolom. Sisa ruang dibagi rata berkat <code>1fr</code>.</p>
+        </div>
+    </section>
+
+    <!-- DEMO 2: auto-fit -->
+    <section class="demo-section">
+        <h2>🎯 Demo 2: auto-fit — Item Melar</h2>
+        <p>Perbedaan terlihat ketika item sedikit. <code>auto-fit</code> membuat item melar mengisi ruang.</p>
+
+        <h3>auto-fill (3 item — ada ruang kosong di kanan)</h3>
+        <div class="demo-container grid-autofill-few">
+            <div class="grid-item">Card 1</div>
+            <div class="grid-item">Card 2</div>
+            <div class="grid-item">Card 3</div>
+        </div>
+
+        <h3>auto-fit (3 item — item melar mengisi seluruh ruang)</h3>
+        <div class="demo-container grid-autofit-few">
+            <div class="grid-item">Card 1</div>
+            <div class="grid-item">Card 2</div>
+            <div class="grid-item">Card 3</div>
+        </div>
+
+        <div class="code-block">
+            <h4>CSS:</h4>
+            <pre><code>/* auto-fill: kolom kosong tetap ada (tidak terlihat) */
+.auto-fill {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+}
+
+/* auto-fit: kolom kosong di-collapse, item melar */
+.auto-fit {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+}
+
+/* Perbedaan terlihat jelas ketika item < kolom yang tersedia */</code></pre>
+        </div>
+
+        <div class="explanation">
+            <p>✅ <strong>Kapan pakai mana?</strong> Gunakan <code>auto-fit</code> jika kamu mau item selalu mengisi seluruh lebar. Gunakan <code>auto-fill</code> jika kamu mau menjaga ukuran konsisten.</p>
+        </div>
+    </section>
+
+    <!-- DEMO 3: Responsive Card Layout -->
+    <section class="demo-section">
+        <h2>🎯 Demo 3: Layout Kartu Responsif (Dunia Nyata)</h2>
+        <p>Contoh nyata: gallery produk yang responsif sempurna.</p>
+
+        <div class="demo-container grid-cards">
+            <div class="card">
+                <div class="card-img">🖼️</div>
+                <div class="card-body">
+                    <h4>Produk 1</h4>
+                    <p>Deskripsi singkat produk pertama.</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-img">🎨</div>
+                <div class="card-body">
+                    <h4>Produk 2</h4>
+                    <p>Deskripsi singkat produk kedua.</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-img">📷</div>
+                <div class="card-body">
+                    <h4>Produk 3</h4>
+                    <p>Deskripsi singkat produk ketiga.</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-img">🎵</div>
+                <div class="card-body">
+                    <h4>Produk 4</h4>
+                    <p>Deskripsi singkat produk keempat.</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-img">📚</div>
+                <div class="card-body">
+                    <h4>Produk 5</h4>
+                    <p>Deskripsi singkat produk kelima.</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-img">🎮</div>
+                <div class="card-body">
+                    <h4>Produk 6</h4>
+                    <p>Deskripsi singkat produk keenam.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="code-block">
+            <h4>CSS:</h4>
+            <pre><code>.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.card {
+    background: #1a1a3e;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+/* Hanya 3 baris CSS untuk grid responsif!
+   Tidak ada media query sama sekali. */</code></pre>
+        </div>
+    </section>
+
+    <!-- DEMO 4: Perbandingan Strategi -->
+    <section class="demo-section">
+        <h2>🎯 Demo 4: Kapan Pakai Strategi Apa?</h2>
+
+        <div class="concept-box" style="margin-bottom: 0;">
+            <h3>🗺️ Panduan Memilih</h3>
+            <table class="strategy-table">
+                <thead>
+                    <tr>
+                        <th>Situasi</th>
+                        <th>Strategi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Kartu produk / gallery</td>
+                        <td><code>repeat(auto-fit, minmax(250px, 1fr))</code></td>
+                    </tr>
+                    <tr>
+                        <td>Sidebar + konten (2 kolom tetap)</td>
+                        <td><code>250px 1fr</code> + media query untuk stack</td>
+                    </tr>
+                    <tr>
+                        <td>Grid angka tetap tapi fleksibel</td>
+                        <td><code>repeat(3, 1fr)</code></td>
+                    </tr>
+                    <tr>
+                        <td>Dashboard kompleks</td>
+                        <td><code>grid-template-areas</code> + media query</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <div class="nav-buttons">
+        <a href="../grid-alignment/" class="btn-prev">← Sebelumnya: Grid Alignment</a>
+        <a href="../grid-dashboard/" class="btn-next">Selanjutnya: Grid Dashboard →</a>
+    </div>
+</body>
+
+</html>

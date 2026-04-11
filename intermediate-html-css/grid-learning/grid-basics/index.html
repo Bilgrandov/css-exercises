@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grid Basics — Pengenalan CSS Grid</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <a href="../../../index.html" class="back-link">← Kembali ke Daftar Exercise</a>
+
+    <header class="page-header">
+        <h1>📐 Grid Basics</h1>
+        <p class="subtitle">Pengenalan <code>display: grid</code>, kolom, baris, dan gap</p>
+    </header>
+
+    <!-- TEORI -->
+    <section class="theory">
+        <h2>📖 Apa itu CSS Grid?</h2>
+        <p>CSS Grid adalah sistem layout <strong>dua dimensi</strong> — artinya kamu bisa mengatur elemen secara horizontal (kolom) DAN vertikal (baris) sekaligus. Berbeda dengan Flexbox yang hanya satu dimensi.</p>
+
+        <div class="concept-box">
+            <h3>Konsep Dasar</h3>
+            <ul>
+                <li><code>display: grid</code> — Mengaktifkan grid pada container</li>
+                <li><code>grid-template-columns</code> — Menentukan jumlah & lebar kolom</li>
+                <li><code>grid-template-rows</code> — Menentukan jumlah & tinggi baris</li>
+                <li><code>gap</code> — Jarak antar item grid (bisa juga <code>row-gap</code> dan <code>column-gap</code>)</li>
+            </ul>
+        </div>
+
+        <div class="concept-box analogy">
+            <h3>🎯 Analogi</h3>
+            <p>Bayangkan Grid seperti <strong>tabel Excel</strong> — kamu tentukan berapa kolom dan baris, lalu taruh konten di sel-sel yang kamu mau. Tapi jauh lebih fleksibel dari tabel HTML!</p>
+        </div>
+    </section>
+
+    <!-- DEMO 1: Grid Pertama -->
+    <section class="demo-section">
+        <h2>🎯 Demo 1: Grid Pertama Kamu</h2>
+        <p>Grid 3 kolom sederhana dengan <code>grid-template-columns: 200px 200px 200px</code></p>
+
+        <div class="demo-container grid-demo-1">
+            <div class="grid-item">1</div>
+            <div class="grid-item">2</div>
+            <div class="grid-item">3</div>
+            <div class="grid-item">4</div>
+            <div class="grid-item">5</div>
+            <div class="grid-item">6</div>
+        </div>
+
+        <div class="code-block">
+            <h4>CSS:</h4>
+            <pre><code>.container {
+    display: grid;
+    grid-template-columns: 200px 200px 200px;
+    gap: 10px;
+}</code></pre>
+        </div>
+
+        <div class="explanation">
+            <p>✅ <strong>Penjelasan:</strong> Kita punya 6 item. Karena kita definisikan 3 kolom, item otomatis akan membuat 2 baris. Grid secara otomatis membuat baris baru ketika kolom sudah penuh!</p>
+        </div>
+    </section>
+
+    <!-- DEMO 2: Grid Template Rows -->
+    <section class="demo-section">
+        <h2>🎯 Demo 2: Mengatur Baris dengan grid-template-rows</h2>
+        <p>Kita bisa mengatur tinggi setiap baris secara eksplisit.</p>
+
+        <div class="demo-container grid-demo-2">
+            <div class="grid-item">1</div>
+            <div class="grid-item">2</div>
+            <div class="grid-item">3</div>
+            <div class="grid-item">4</div>
+            <div class="grid-item">5</div>
+            <div class="grid-item">6</div>
+        </div>
+
+        <div class="code-block">
+            <h4>CSS:</h4>
+            <pre><code>.container {
+    display: grid;
+    grid-template-columns: 200px 200px 200px;
+    grid-template-rows: 100px 150px;
+    gap: 10px;
+}</code></pre>
+        </div>
+
+        <div class="explanation">
+            <p>✅ <strong>Penjelasan:</strong> Baris pertama tingginya 100px, baris kedua 150px. Perhatikan perbedaan tinggi antara baris atas dan bawah!</p>
+        </div>
+    </section>
+
+    <!-- DEMO 3: GAP -->
+    <section class="demo-section">
+        <h2>🎯 Demo 3: Mengatur Jarak dengan Gap</h2>
+        <p>Ada 3 cara mengatur gap: <code>gap</code> (keduanya), <code>row-gap</code>, dan <code>column-gap</code>.</p>
+
+        <h3>gap: 10px (sama rata)</h3>
+        <div class="demo-container grid-demo-gap-1">
+            <div class="grid-item">1</div>
+            <div class="grid-item">2</div>
+            <div class="grid-item">3</div>
+            <div class="grid-item">4</div>
+            <div class="grid-item">5</div>
+            <div class="grid-item">6</div>
+        </div>
+
+        <h3>row-gap: 30px; column-gap: 5px</h3>
+        <div class="demo-container grid-demo-gap-2">
+            <div class="grid-item">1</div>
+            <div class="grid-item">2</div>
+            <div class="grid-item">3</div>
+            <div class="grid-item">4</div>
+            <div class="grid-item">5</div>
+            <div class="grid-item">6</div>
+        </div>
+
+        <div class="code-block">
+            <h4>CSS:</h4>
+            <pre><code>/* Gap sama rata */
+.grid-1 { gap: 10px; }
+
+/* Gap beda untuk baris dan kolom */
+.grid-2 {
+    row-gap: 30px;
+    column-gap: 5px;
+}
+
+/* Shorthand: gap: row column */
+.grid-3 { gap: 30px 5px; }</code></pre>
+        </div>
+    </section>
+
+    <!-- DEMO 4: CAMPURAN UKURAN -->
+    <section class="demo-section">
+        <h2>🎯 Demo 4: Campuran Ukuran Kolom</h2>
+        <p>Setiap kolom bisa punya lebar yang berbeda!</p>
+
+        <div class="demo-container grid-demo-mixed">
+            <div class="grid-item">Sidebar<br>100px</div>
+            <div class="grid-item">Main Content<br>300px</div>
+            <div class="grid-item">Aside<br>150px</div>
+        </div>
+
+        <div class="code-block">
+            <h4>CSS:</h4>
+            <pre><code>.container {
+    display: grid;
+    grid-template-columns: 100px 300px 150px;
+    gap: 10px;
+}</code></pre>
+        </div>
+
+        <div class="explanation">
+            <p>✅ <strong>Penjelasan:</strong> Ini menunjukkan bahwa setiap kolom bisa punya lebar yang berbeda. Sangat berguna untuk layout seperti sidebar + konten utama!</p>
+        </div>
+    </section>
+
+    <!-- RINGKASAN -->
+    <section class="summary-section">
+        <h2>📝 Ringkasan</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Property</th>
+                    <th>Fungsi</th>
+                    <th>Contoh</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>display: grid</code></td>
+                    <td>Aktifkan grid</td>
+                    <td><code>display: grid</code></td>
+                </tr>
+                <tr>
+                    <td><code>grid-template-columns</code></td>
+                    <td>Atur jumlah & lebar kolom</td>
+                    <td><code>200px 200px 200px</code></td>
+                </tr>
+                <tr>
+                    <td><code>grid-template-rows</code></td>
+                    <td>Atur jumlah & tinggi baris</td>
+                    <td><code>100px 150px</code></td>
+                </tr>
+                <tr>
+                    <td><code>gap</code></td>
+                    <td>Jarak antar item</td>
+                    <td><code>10px</code> atau <code>20px 10px</code></td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <div class="nav-buttons">
+        <span></span>
+        <a href="../grid-units/" class="btn-next">Selanjutnya: Grid Units →</a>
+    </div>
+</body>
+
+</html>

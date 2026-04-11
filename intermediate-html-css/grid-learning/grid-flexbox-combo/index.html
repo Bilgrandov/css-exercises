@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grid + Flexbox Combo — Menggabungkan Dua Kekuatan</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <a href="../../../index.html" class="back-link">← Kembali ke Daftar Exercise</a>
+
+    <header class="page-header">
+        <h1>🤝 Grid + Flexbox Combo</h1>
+        <p class="subtitle">Menggabungkan Grid untuk layout & Flexbox untuk komponen — combo terkuat di CSS!</p>
+    </header>
+
+    <!-- TEORI -->
+    <section class="theory">
+        <h2>📖 Kapan Pakai Grid vs Flexbox?</h2>
+        <p>Ini pertanyaan yang paling sering ditanyakan! Jawabannya: <strong>pakai keduanya!</strong> Masing-masing punya kekuatan sendiri.</p>
+
+        <div class="concept-box">
+            <h3>🆚 Grid vs Flexbox</h3>
+            <table class="compare-table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>CSS Grid</th>
+                        <th>Flexbox</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Dimensi</strong></td>
+                        <td>2D (baris + kolom)</td>
+                        <td>1D (baris ATAU kolom)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Cocok untuk</strong></td>
+                        <td>Layout halaman, grid kartu</td>
+                        <td>Navbar, card content, alignment</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Kontrol</strong></td>
+                        <td>Container mengatur layout</td>
+                        <td>Item lebih fleksibel</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Konten</strong></td>
+                        <td>Layout-first (struktur dulu)</td>
+                        <td>Content-first (konten dulu)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="concept-box analogy">
+            <h3>🎯 Aturan Emas</h3>
+            <p><strong>Grid</strong> untuk "tata letak besar" (layout halaman, grid section) → <strong>Flexbox</strong> untuk "komponen kecil" (navbar items, card content, buttons). Gunakan Grid di level atas, Flexbox di level dalam!</p>
+        </div>
+    </section>
+
+    <!-- DEMO 1: Pattern dasar -->
+    <section class="demo-section">
+        <h2>🎯 Demo 1: Pattern Dasar — Grid di Luar, Flexbox di Dalam</h2>
+        <p>Kartu ditata dengan Grid, konten dalam kartu ditata dengan Flexbox.</p>
+
+        <div class="combo-grid-1">
+            <div class="combo-card">
+                <div class="combo-card-icon">🚀</div>
+                <h4>Launch Fast</h4>
+                <p>Deploy aplikasimu dalam hitungan menit.</p>
+                <button class="combo-btn">Mulai</button>
+            </div>
+            <div class="combo-card">
+                <div class="combo-card-icon">🛡️</div>
+                <h4>Keamanan</h4>
+                <p>Enkripsi end-to-end untuk semua data.</p>
+                <button class="combo-btn">Pelajari</button>
+            </div>
+            <div class="combo-card">
+                <div class="combo-card-icon">📈</div>
+                <h4>Skalabel</h4>
+                <p>Dari 1 user ke 1 juta user tanpa masalah.</p>
+                <button class="combo-btn">Scale Up</button>
+            </div>
+        </div>
+
+        <div class="code-block">
+            <h4>CSS:</h4>
+            <pre><code>/* GRID — mengatur tata letak kartu */
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+/* FLEXBOX — mengatur isi dalam kartu */
+.card {
+    display: flex;
+    flex-direction: column;   /* susun vertikal */
+    align-items: center;       /* tengah horizontal */
+    text-align: center;
+    padding: 24px;
+}
+
+/* Tombol selalu di bawah berkat flex */
+.card button {
+    margin-top: auto;         /* dorong ke bawah! */
+}</code></pre>
+        </div>
+
+        <div class="explanation">
+            <p>✅ <strong>Key insight:</strong> Grid mengatur POSISI kartu di halaman. Flexbox mengatur KONTEN di dalam setiap kartu. <code>margin-top: auto</code> di Flexbox mendorong tombol ke bawah — trik yang sangat berguna!</p>
+        </div>
+    </section>
+
+    <!-- DEMO 2: Halaman Lengkap -->
+    <section class="demo-section">
+        <h2>🎯 Demo 2: Halaman Web Lengkap — Grid + Flexbox Everywhere</h2>
+        <p>Contoh nyata halaman web yang menggabungkan Grid dan Flexbox.</p>
+    </section>
+
+    <div class="full-page-demo">
+        <!-- NAV — Flexbox -->
+        <nav class="fp-nav">
+            <div class="fp-logo">🌐 MyApp</div>
+            <div class="fp-nav-links">
+                <a href="#">Home</a>
+                <a href="#">About</a>
+                <a href="#">Services</a>
+                <a href="#">Contact</a>
+            </div>
+            <button class="fp-cta">Sign Up</button>
+        </nav>
+
+        <!-- HERO — Flexbox -->
+        <section class="fp-hero">
+            <div class="fp-hero-text">
+                <h2>Bangun Sesuatu yang Luar Biasa</h2>
+                <p>Platform terbaik untuk developer yang ingin membuat web app modern.</p>
+                <div class="fp-hero-buttons">
+                    <button class="fp-btn primary">Get Started</button>
+                    <button class="fp-btn secondary">Learn More</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- FEATURES — Grid (layout) + Flexbox (card content) -->
+        <section class="fp-features">
+            <h3 class="section-title">✨ Features</h3>
+            <div class="fp-features-grid">
+                <div class="fp-feature-card">
+                    <span class="fp-feature-icon">⚡</span>
+                    <h4>Super Cepat</h4>
+                    <p>Loading time di bawah 1 detik.</p>
+                </div>
+                <div class="fp-feature-card">
+                    <span class="fp-feature-icon">🎨</span>
+                    <h4>Desain Indah</h4>
+                    <p>Template premium siap pakai.</p>
+                </div>
+                <div class="fp-feature-card">
+                    <span class="fp-feature-icon">🔒</span>
+                    <h4>Aman</h4>
+                    <p>Security-first architecture.</p>
+                </div>
+                <div class="fp-feature-card">
+                    <span class="fp-feature-icon">📱</span>
+                    <h4>Responsif</h4>
+                    <p>Sempurna di semua device.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- TESTIMONIALS — Grid + Flexbox -->
+        <section class="fp-testimonials">
+            <h3 class="section-title">💬 Testimonials</h3>
+            <div class="fp-testimonials-grid">
+                <div class="fp-testimonial">
+                    <p class="fp-quote">"Platform ini mengubah cara kami bekerja. Sangat recommended!"</p>
+                    <div class="fp-author">
+                        <div class="fp-avatar">👩‍💻</div>
+                        <div>
+                            <strong>Sarah Dev</strong>
+                            <span>CTO, TechCo</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="fp-testimonial">
+                    <p class="fp-quote">"Deployment jadi 10x lebih cepat. Luar biasa!"</p>
+                    <div class="fp-author">
+                        <div class="fp-avatar">👨‍🔬</div>
+                        <div>
+                            <strong>Budi Engineer</strong>
+                            <span>Lead Dev, StartupXYZ</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="fp-testimonial">
+                    <p class="fp-quote">"UI components-nya premium banget. Hemat waktu design."</p>
+                    <div class="fp-author">
+                        <div class="fp-avatar">👩‍🎨</div>
+                        <div>
+                            <strong>Ani Designer</strong>
+                            <span>UI/UX, CreativeHub</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FOOTER — Grid (layout) + Flexbox (content) -->
+        <footer class="fp-footer">
+            <div class="fp-footer-grid">
+                <div class="fp-footer-col">
+                    <h4>MyApp</h4>
+                    <p>Platform modern untuk developer Indonesia.</p>
+                </div>
+                <div class="fp-footer-col">
+                    <h4>Links</h4>
+                    <a href="#">Home</a>
+                    <a href="#">About</a>
+                    <a href="#">Pricing</a>
+                </div>
+                <div class="fp-footer-col">
+                    <h4>Resources</h4>
+                    <a href="#">Docs</a>
+                    <a href="#">Blog</a>
+                    <a href="#">Support</a>
+                </div>
+                <div class="fp-footer-col">
+                    <h4>Social</h4>
+                    <a href="#">Twitter</a>
+                    <a href="#">GitHub</a>
+                    <a href="#">Discord</a>
+                </div>
+            </div>
+            <div class="fp-footer-bottom">
+                <span>© 2026 MyApp. Built with Grid + Flexbox 💪</span>
+            </div>
+        </footer>
+    </div>
+
+    <!-- PENJELASAN -->
+    <section class="demo-section" style="margin-top: 40px;">
+        <h2>📝 Peta Grid + Flexbox di Halaman Ini</h2>
+
+        <div class="code-block">
+            <h4>Peta Penggunaan:</h4>
+            <pre><code>HALAMAN WEB
+│
+├── NAV ─────────────── Flexbox (row) → logo | links | button
+│
+├── HERO ────────────── Flexbox (column) → text | buttons (row)
+│
+├── FEATURES SECTION
+│   └── .features-grid ── Grid (auto-fit) → 4 cards
+│       └── .feature-card ── Flexbox (column) → icon | title | text
+│
+├── TESTIMONIALS
+│   └── .testimonials-grid ── Grid (3 columns) → 3 testimonials
+│       └── .testimonial ── Flexbox (column) → quote | author-row
+│           └── .author ── Flexbox (row) → avatar | name
+│
+└── FOOTER
+    └── .footer-grid ── Grid (4 columns) → 4 footer sections
+        └── .footer-col ── Flexbox (column) → title | links</code></pre>
+        </div>
+
+        <div class="explanation">
+            <p>✅ <strong>Pattern:</strong> Perhatikan polanya — <strong>Grid</strong> selalu digunakan di level "tata letak" (mengatur posisi section/cards), sedangkan <strong>Flexbox</strong> digunakan di level "komponen" (mengatur isi di dalam card, navbar, footer column). Ini adalah pattern yang digunakan oleh sebagian besar website modern!</p>
+        </div>
+    </section>
+
+    <!-- RINGKASAN AKHIR -->
+    <section class="theory">
+        <div class="concept-box" style="border-left-color: #ffd54f;">
+            <h3 style="color: #ffd54f;">🎓 Selamat! Kamu Sudah Menyelesaikan Semua!</h3>
+            <p>Kamu sudah mempelajari CSS Grid dari dasar sampai praktek nyata:</p>
+            <ol style="padding-left: 20px; margin-top: 10px;">
+                <li><strong>Grid Basics</strong> — display: grid, columns, rows, gap</li>
+                <li><strong>Grid Units</strong> — fr, repeat(), minmax()</li>
+                <li><strong>Grid Placement</strong> — grid-column, grid-row, span</li>
+                <li><strong>Grid Areas</strong> — grid-template-areas</li>
+                <li><strong>Grid Alignment</strong> — justify, align, place</li>
+                <li><strong>Grid Responsive</strong> — auto-fill, auto-fit</li>
+                <li><strong>Grid Dashboard</strong> — layout dashboard dari scratch</li>
+                <li><strong>Grid Card Gallery</strong> — gallery kartu responsif</li>
+                <li><strong>Grid + Flexbox</strong> — kombinasi keduanya</li>
+            </ol>
+            <p style="margin-top: 12px;">Sekarang kamu punya semua tools yang dibutuhkan untuk membuat layout web modern. Selamat berlatih! 🚀</p>
+        </div>
+    </section>
+
+    <div class="nav-buttons">
+        <a href="../grid-card-gallery/" class="btn-prev">← Sebelumnya: Card Gallery</a>
+        <a href="../../../index.html" class="btn-next">🏠 Kembali ke Home</a>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grid Dashboard — Membangun Layout Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <a href="../../../index.html" class="back-link">← Kembali ke Daftar Exercise</a>
+
+    <header class="page-header">
+        <h1>📊 Grid Dashboard</h1>
+        <p class="subtitle">Membangun layout dashboard lengkap dengan CSS Grid dari scratch</p>
+    </header>
+
+    <!-- TEORI -->
+    <section class="theory">
+        <h2>📖 Dashboard Layout — Praktek Nyata</h2>
+        <p>Sekarang kita akan menggabungkan semua yang sudah dipelajari untuk membangun dashboard layout yang sering ditemui di aplikasi web nyata:</p>
+
+        <div class="concept-box">
+            <h3>Komponen Dashboard</h3>
+            <ul>
+                <li><strong>Header</strong> — bagian atas, navigasi dan logo</li>
+                <li><strong>Sidebar</strong> — menu navigasi vertikal di kiri</li>
+                <li><strong>Main Content</strong> — area konten utama di tengah</li>
+                <li><strong>Stats Cards</strong> — kartu statistik di dalam main content</li>
+                <li><strong>Footer</strong> — informasi bawah</li>
+            </ul>
+        </div>
+
+        <div class="concept-box">
+            <h3>Teknik yang Digunakan</h3>
+            <ul>
+                <li><code>grid-template-areas</code> — untuk layout utama (header, sidebar, main, footer)</li>
+                <li><code>repeat(auto-fit, minmax())</code> — untuk stats cards yang responsif</li>
+                <li><code>grid-column: span</code> — untuk widget yang lebih besar</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- HASIL DASHBOARD -->
+    <section class="demo-section">
+        <h2>🎯 Hasil: Dashboard Layout</h2>
+        <p>Layout di bawah ini dibuat 100% dengan CSS Grid. Coba resize browser!</p>
+    </section>
+
+    <!-- DASHBOARD -->
+    <div class="dashboard">
+        <header class="dash-header">
+            <div class="logo">📊 Dashboard</div>
+            <nav class="header-nav">
+                <span>Home</span>
+                <span>Reports</span>
+                <span>Settings</span>
+            </nav>
+        </header>
+
+        <aside class="dash-sidebar">
+            <div class="sidebar-item active">📈 Overview</div>
+            <div class="sidebar-item">👥 Users</div>
+            <div class="sidebar-item">💰 Revenue</div>
+            <div class="sidebar-item">📦 Products</div>
+            <div class="sidebar-item">📋 Orders</div>
+            <div class="sidebar-item">⚙️ Settings</div>
+        </aside>
+
+        <main class="dash-main">
+            <!-- Stats Cards -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">👥</div>
+                    <div class="stat-info">
+                        <span class="stat-label">Total Users</span>
+                        <span class="stat-value">12,543</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">💰</div>
+                    <div class="stat-info">
+                        <span class="stat-label">Revenue</span>
+                        <span class="stat-value">$84,250</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">📦</div>
+                    <div class="stat-info">
+                        <span class="stat-label">Orders</span>
+                        <span class="stat-value">1,847</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">⭐</div>
+                    <div class="stat-info">
+                        <span class="stat-label">Rating</span>
+                        <span class="stat-value">4.8/5</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Charts area -->
+            <div class="charts-grid">
+                <div class="chart-card wide">
+                    <h3>📈 Sales Overview</h3>
+                    <div class="chart-placeholder">
+                        <div class="bar" style="height: 40%;"></div>
+                        <div class="bar" style="height: 65%;"></div>
+                        <div class="bar" style="height: 50%;"></div>
+                        <div class="bar" style="height: 80%;"></div>
+                        <div class="bar" style="height: 70%;"></div>
+                        <div class="bar" style="height: 90%;"></div>
+                        <div class="bar" style="height: 60%;"></div>
+                    </div>
+                </div>
+                <div class="chart-card">
+                    <h3>🌍 Traffic Sources</h3>
+                    <div class="traffic-list">
+                        <div class="traffic-item">
+                            <span>Direct</span>
+                            <div class="traffic-bar"><div class="traffic-fill" style="width: 65%;"></div></div>
+                        </div>
+                        <div class="traffic-item">
+                            <span>Social</span>
+                            <div class="traffic-bar"><div class="traffic-fill" style="width: 45%;"></div></div>
+                        </div>
+                        <div class="traffic-item">
+                            <span>Organic</span>
+                            <div class="traffic-bar"><div class="traffic-fill" style="width: 80%;"></div></div>
+                        </div>
+                        <div class="traffic-item">
+                            <span>Referral</span>
+                            <div class="traffic-bar"><div class="traffic-fill" style="width: 30%;"></div></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="chart-card">
+                    <h3>🕐 Recent Activity</h3>
+                    <div class="activity-list">
+                        <div class="activity">✅ Order #1234 shipped</div>
+                        <div class="activity">👤 New user registered</div>
+                        <div class="activity">💬 New review posted</div>
+                        <div class="activity">📦 Stock updated</div>
+                        <div class="activity">🔔 System alert resolved</div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="dash-footer">
+            <span>© 2026 Dashboard App</span>
+            <span>Built with CSS Grid 💚</span>
+        </footer>
+    </div>
+
+    <!-- PENJELASAN KODE -->
+    <section class="demo-section" style="margin-top: 40px;">
+        <h2>📝 Penjelasan Kode</h2>
+
+        <div class="code-block">
+            <h4>Layout Utama (grid-template-areas):</h4>
+            <pre><code>.dashboard {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    grid-template-rows: 60px 1fr 40px;
+    grid-template-areas:
+        "header  header"
+        "sidebar main"
+        "footer  footer";
+    height: 100vh;
+}
+
+.dash-header  { grid-area: header; }
+.dash-sidebar { grid-area: sidebar; }
+.dash-main    { grid-area: main; }
+.dash-footer  { grid-area: footer; }</code></pre>
+        </div>
+
+        <div class="code-block">
+            <h4>Stats Cards (auto-fit responsif):</h4>
+            <pre><code>.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+}</code></pre>
+        </div>
+
+        <div class="code-block">
+            <h4>Charts Grid (span untuk widget lebar):</h4>
+            <pre><code>.charts-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+}
+
+.chart-card.wide {
+    grid-column: span 2;  /* menempati 2 kolom */
+}</code></pre>
+        </div>
+    </section>
+
+    <div class="nav-buttons">
+        <a href="../grid-responsive/" class="btn-prev">← Sebelumnya: Grid Responsive</a>
+        <a href="../grid-card-gallery/" class="btn-next">Selanjutnya: Card Gallery →</a>
+    </div>
+</body>
+
+</html>

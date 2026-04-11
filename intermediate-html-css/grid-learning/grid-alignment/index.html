@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grid Alignment — Perataan di Grid</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <a href="../../../index.html" class="back-link">← Kembali ke Daftar Exercise</a>
+
+    <header class="page-header">
+        <h1>⚖️ Grid Alignment</h1>
+        <p class="subtitle">Menguasai <code>justify</code>, <code>align</code>, dan <code>place</code> di CSS Grid</p>
+    </header>
+
+    <!-- TEORI -->
+    <section class="theory">
+        <h2>📖 Dua Sumbu di Grid</h2>
+        <p>Grid bekerja dalam <strong>dua sumbu</strong>: horizontal (inline/row axis) dan vertikal (block/column axis). Property alignment di Grid membiarkan kamu mengontrol posisi item di kedua sumbu ini.</p>
+
+        <div class="concept-box">
+            <h3>Peta Property Alignment</h3>
+            <table class="mini-table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Horizontal (Justify)</th>
+                        <th>Vertikal (Align)</th>
+                        <th>Keduanya (Place)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Semua item</strong> (di container)</td>
+                        <td><code>justify-items</code></td>
+                        <td><code>align-items</code></td>
+                        <td><code>place-items</code></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Satu item</strong> (di item)</td>
+                        <td><code>justify-self</code></td>
+                        <td><code>align-self</code></td>
+                        <td><code>place-self</code></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Seluruh grid</strong> (di container)</td>
+                        <td><code>justify-content</code></td>
+                        <td><code>align-content</code></td>
+                        <td><code>place-content</code></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="concept-box analogy">
+            <h3>🎯 Ingat Mudah</h3>
+            <p><strong>justify</strong> = horizontal →, <strong>align</strong> = vertikal ↓, <strong>place</strong> = shorthand keduanya (align dulu, justify kemudian).</p>
+        </div>
+    </section>
+
+    <!-- DEMO 1: justify-items & align-items -->
+    <section class="demo-section">
+        <h2>🎯 Demo 1: justify-items & align-items</h2>
+        <p>Mengatur posisi <strong>semua item</strong> di dalam sel mereka masing-masing.</p>
+
+        <h3>justify-items: start (kiri)</h3>
+        <div class="demo-container align-demo-1a">
+            <div class="grid-item">A</div>
+            <div class="grid-item">B</div>
+            <div class="grid-item">C</div>
+        </div>
+
+        <h3>justify-items: center (tengah)</h3>
+        <div class="demo-container align-demo-1b">
+            <div class="grid-item">A</div>
+            <div class="grid-item">B</div>
+            <div class="grid-item">C</div>
+        </div>
+
+        <h3>justify-items: end (kanan)</h3>
+        <div class="demo-container align-demo-1c">
+            <div class="grid-item">A</div>
+            <div class="grid-item">B</div>
+            <div class="grid-item">C</div>
+        </div>
+
+        <h3>place-items: center center (tengah sempurna)</h3>
+        <div class="demo-container align-demo-1d">
+            <div class="grid-item">A</div>
+            <div class="grid-item">B</div>
+            <div class="grid-item">C</div>
+        </div>
+
+        <div class="code-block">
+            <h4>CSS:</h4>
+            <pre><code>/* Posisi item di kiri sel */
+.start   { justify-items: start; }
+
+/* Posisi item di tengah sel */
+.center  { justify-items: center; }
+
+/* Posisi item di kanan sel */
+.end     { justify-items: end; }
+
+/* Tengah sempurna (vertikal + horizontal) */
+.perfect { place-items: center center; }
+
+/* Nilai: start | end | center | stretch (default) */</code></pre>
+        </div>
+
+        <div class="explanation">
+            <p>✅ <strong>Default:</strong> <code>stretch</code> — item mengisi seluruh sel. Ketika kamu ubah ke start/center/end, item menyusut sesuai kontennya.</p>
+        </div>
+    </section>
+
+    <!-- DEMO 2: justify-self & align-self -->
+    <section class="demo-section">
+        <h2>🎯 Demo 2: justify-self & align-self (per item)</h2>
+        <p>Mengatur posisi <strong>satu item saja</strong>, menimpa pengaturan container.</p>
+
+        <div class="demo-container align-demo-2">
+            <div class="grid-item self-start">start</div>
+            <div class="grid-item self-center">center</div>
+            <div class="grid-item self-end">end</div>
+            <div class="grid-item self-stretch">stretch</div>
+            <div class="grid-item self-perfect">place-self:<br>center center</div>
+            <div class="grid-item">default</div>
+        </div>
+
+        <div class="code-block">
+            <h4>CSS:</h4>
+            <pre><code>.item-start   { justify-self: start; }
+.item-center  { justify-self: center; }
+.item-end     { justify-self: end; }
+.item-stretch { justify-self: stretch; }  /* default */
+.item-perfect { place-self: center center; }
+
+/* place-self: align-self justify-self */</code></pre>
+        </div>
+    </section>
+
+    <!-- DEMO 3: justify-content & align-content -->
+    <section class="demo-section">
+        <h2>🎯 Demo 3: justify-content & align-content</h2>
+        <p>Mengatur posisi <strong>seluruh grid</strong> di dalam container (ketika grid lebih kecil dari container).</p>
+
+        <h3>justify-content: center</h3>
+        <div class="demo-container align-demo-3a">
+            <div class="grid-item">1</div>
+            <div class="grid-item">2</div>
+            <div class="grid-item">3</div>
+            <div class="grid-item">4</div>
+        </div>
+
+        <h3>justify-content: space-between</h3>
+        <div class="demo-container align-demo-3b">
+            <div class="grid-item">1</div>
+            <div class="grid-item">2</div>
+            <div class="grid-item">3</div>
+            <div class="grid-item">4</div>
+        </div>
+
+        <h3>justify-content: space-evenly</h3>
+        <div class="demo-container align-demo-3c">
+            <div class="grid-item">1</div>
+            <div class="grid-item">2</div>
+            <div class="grid-item">3</div>
+            <div class="grid-item">4</div>
+        </div>
+
+        <div class="code-block">
+            <h4>CSS:</h4>
+            <pre><code>/* Grid menggunakan kolom 100px (lebih kecil dari container) */
+.container {
+    display: grid;
+    grid-template-columns: repeat(2, 100px);
+    grid-template-rows: repeat(2, 80px);
+}
+
+/* Posisikan seluruh grid di tengah container */
+.center-grid  { justify-content: center; }
+
+/* Ruang merata di antara kolom */
+.space-between { justify-content: space-between; }
+
+/* Ruang merata di sekitar semua kolom */
+.space-evenly  { justify-content: space-evenly; }
+
+/* Nilai: start | end | center | stretch |
+   space-between | space-around | space-evenly */</code></pre>
+        </div>
+
+        <div class="explanation">
+            <p>✅ <strong>Kapan ini berguna?</strong> Ketika kolom/baris grid punya ukuran tetap (px) dan tidak mengisi seluruh container. Mirip dengan Flexbox <code>justify-content</code>!</p>
+        </div>
+    </section>
+
+    <!-- RINGKASAN -->
+    <section class="summary-section">
+        <h2>📝 Ringkasan Cepat</h2>
+        <div class="concept-box">
+            <h3>Cheat Sheet</h3>
+            <ul>
+                <li><code>justify-items</code> / <code>align-items</code> → posisi SEMUA item di sel mereka</li>
+                <li><code>justify-self</code> / <code>align-self</code> → posisi SATU item di selnya</li>
+                <li><code>justify-content</code> / <code>align-content</code> → posisi SELURUH GRID di container</li>
+                <li><code>place-*</code> → shorthand: <code>align justify</code></li>
+            </ul>
+        </div>
+    </section>
+
+    <div class="nav-buttons">
+        <a href="../grid-areas/" class="btn-prev">← Sebelumnya: Grid Areas</a>
+        <a href="../grid-responsive/" class="btn-next">Selanjutnya: Grid Responsive →</a>
+    </div>
+</body>
+
+</html>

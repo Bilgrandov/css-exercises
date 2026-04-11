@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grid Placement — Penempatan Item di Grid</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <a href="../../../index.html" class="back-link">← Kembali ke Daftar Exercise</a>
+
+    <header class="page-header">
+        <h1>📍 Grid Placement</h1>
+        <p class="subtitle">Menguasai <code>grid-column</code>, <code>grid-row</code>, dan <code>span</code></p>
+    </header>
+
+    <!-- TEORI -->
+    <section class="theory">
+        <h2>📖 Grid Lines — Garis Tak Terlihat</h2>
+        <p>Setiap grid punya <strong>garis-garis (lines)</strong> yang bernomor. Kolom dimulai dari garis 1 di kiri. Baris dimulai dari garis 1 di atas. Kita bisa menempatkan item di posisi manapun menggunakan nomor garis ini!</p>
+
+        <div class="concept-box">
+            <h3>Sistem Penomoran Grid Lines</h3>
+            <pre class="line-diagram">
+  Kolom:  1    2    3    4
+          |    |    |    |
+Baris 1— [ A ][ B ][ C ]
+Baris 2— [ D ][ E ][ F ]
+Baris 3— [ G ][ H ][ I ]
+          |    |    |    |
+         (garis 1-4 untuk 3 kolom)
+            </pre>
+            <p>Grid 3×3 punya <strong>4 garis kolom</strong> (1-4) dan <strong>4 garis baris</strong> (1-4).</p>
+        </div>
+
+        <div class="concept-box">
+            <h3>Property Penempatan</h3>
+            <ul>
+                <li><code>grid-column-start / grid-column-end</code> — posisi awal & akhir kolom</li>
+                <li><code>grid-row-start / grid-row-end</code> — posisi awal & akhir baris</li>
+                <li><code>grid-column</code> — shorthand: <code>start / end</code></li>
+                <li><code>grid-row</code> — shorthand: <code>start / end</code></li>
+                <li><code>span</code> — merentang beberapa kolom/baris</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- DEMO 1: grid-column -->
+    <section class="demo-section">
+        <h2>🎯 Demo 1: grid-column — Menempatkan Item di Kolom Tertentu</h2>
+        <p>Item A direntangkan dari kolom 1 sampai kolom 3 (menempati 2 kolom).</p>
+
+        <div class="demo-container grid-placement-1">
+            <div class="grid-item item-wide">A<br><small>column: 1 / 3</small></div>
+            <div class="grid-item">B</div>
+            <div class="grid-item">C</div>
+            <div class="grid-item">D</div>
+            <div class="grid-item">E</div>
+        </div>
+
+        <div class="code-block">
+            <h4>CSS:</h4>
+            <pre><code>.container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+/* Item A menempati kolom 1 sampai garis 3 */
+.item-wide {
+    grid-column: 1 / 3; /* dari garis 1 ke garis 3 = 2 kolom */
+}</code></pre>
+        </div>
+
+        <div class="explanation">
+            <p>✅ <strong>Penting:</strong> <code>grid-column: 1 / 3</code> artinya "mulai di garis 1, berakhir di garis 3". Ini <strong>bukan</strong> kolom 1 sampai kolom 3, tapi <strong>garis</strong> 1 sampai garis 3 = 2 kolom.</p>
+        </div>
+    </section>
+
+    <!-- DEMO 2: grid-row -->
+    <section class="demo-section">
+        <h2>🎯 Demo 2: grid-row — Menempatkan Item di Baris Tertentu</h2>
+        <p>Sidebar merentang dari baris 1 sampai baris 3 (2 baris).</p>
+
+        <div class="demo-container grid-placement-2">
+            <div class="grid-item item-tall">Sidebar<br><small>row: 1 / 3</small></div>
+            <div class="grid-item">Main</div>
+            <div class="grid-item">Aside</div>
+            <div class="grid-item">Footer 1</div>
+            <div class="grid-item">Footer 2</div>
+        </div>
+
+        <div class="code-block">
+            <h4>CSS:</h4>
+            <pre><code>.sidebar {
+    grid-row: 1 / 3; /* merentang 2 baris */
+}</code></pre>
+        </div>
+    </section>
+
+    <!-- DEMO 3: SPAN -->
+    <section class="demo-section">
+        <h2>🎯 Demo 3: Kata Kunci span</h2>
+        <p>Daripada menghitung nomor garis, gunakan <code>span</code> untuk bilang "rentangkan sekian kolom/baris".</p>
+
+        <div class="demo-container grid-span-demo">
+            <div class="grid-item span-header">Header<br><small>grid-column: span 4</small></div>
+            <div class="grid-item span-sidebar">Sidebar<br><small>grid-row: span 2</small></div>
+            <div class="grid-item">Content 1</div>
+            <div class="grid-item">Content 2</div>
+            <div class="grid-item">Content 3</div>
+            <div class="grid-item">Content 4</div>
+            <div class="grid-item">Content 5</div>
+            <div class="grid-item span-footer">Footer<br><small>grid-column: span 3</small></div>
+        </div>
+
+        <div class="code-block">
+            <h4>CSS:</h4>
+            <pre><code>.container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+
+.header { grid-column: span 4; }    /* merentang 4 kolom */
+.sidebar { grid-row: span 2; }       /* merentang 2 baris */
+.footer { grid-column: span 3; }     /* merentang 3 kolom */</code></pre>
+        </div>
+
+        <div class="explanation">
+            <p>✅ <strong>span vs nomor garis:</strong> <code>grid-column: span 3</code> = "rentangkan 3 kolom dari posisi saat ini." Lebih mudah dibaca daripada menghitung nomor garis!</p>
+        </div>
+    </section>
+
+    <!-- DEMO 4: Penempatan Spesifik -->
+    <section class="demo-section">
+        <h2>🎯 Demo 4: Penempatan Spesifik dengan grid-column + grid-row</h2>
+        <p>Kita bisa menempatkan item di posisi manapun — bahkan melompati sel!</p>
+
+        <div class="demo-container grid-specific">
+            <div class="grid-item pos-a">A<br><small>col:1/2, row:1/2</small></div>
+            <div class="grid-item pos-b">B<br><small>col:3/4, row:1/3</small></div>
+            <div class="grid-item pos-c">C<br><small>col:1/3, row:3/4</small></div>
+            <div class="grid-item pos-d">D<br><small>col:2/3, row:2/3</small></div>
+        </div>
+
+        <div class="code-block">
+            <h4>CSS:</h4>
+            <pre><code>.container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 100px);
+    gap: 10px;
+}
+
+.pos-a { grid-column: 1 / 2; grid-row: 1 / 2; }
+.pos-b { grid-column: 3 / 4; grid-row: 1 / 3; }  /* 2 baris tinggi */
+.pos-c { grid-column: 1 / 3; grid-row: 3 / 4; }  /* 2 kolom lebar */
+.pos-d { grid-column: 2 / 3; grid-row: 2 / 3; }</code></pre>
+        </div>
+
+        <div class="explanation">
+            <p>✅ <strong>Tips:</strong> Perhatikan bahwa item B menempati 2 baris (row 1-3), dan item C menempati 2 kolom (col 1-3). Sel kosong dibiarkan saja — grid tidak memaksamu mengisi semua sel!</p>
+        </div>
+    </section>
+
+    <!-- RINGKASAN -->
+    <section class="summary-section">
+        <h2>📝 Ringkasan</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Property</th>
+                    <th>Fungsi</th>
+                    <th>Contoh</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>grid-column</code></td>
+                    <td>Posisi kolom (start / end)</td>
+                    <td><code>1 / 3</code> atau <code>span 2</code></td>
+                </tr>
+                <tr>
+                    <td><code>grid-row</code></td>
+                    <td>Posisi baris (start / end)</td>
+                    <td><code>1 / 3</code> atau <code>span 2</code></td>
+                </tr>
+                <tr>
+                    <td><code>span</code></td>
+                    <td>Merentang N kolom/baris</td>
+                    <td><code>grid-column: span 3</code></td>
+                </tr>
+                <tr>
+                    <td><code>grid-column-start</code></td>
+                    <td>Garis mulai kolom</td>
+                    <td><code>grid-column-start: 2</code></td>
+                </tr>
+                <tr>
+                    <td><code>grid-row-end</code></td>
+                    <td>Garis akhir baris</td>
+                    <td><code>grid-row-end: 4</code></td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <div class="nav-buttons">
+        <a href="../grid-units/" class="btn-prev">← Sebelumnya: Grid Units</a>
+        <a href="../grid-areas/" class="btn-next">Selanjutnya: Grid Areas →</a>
+    </div>
+</body>
+
+</html>

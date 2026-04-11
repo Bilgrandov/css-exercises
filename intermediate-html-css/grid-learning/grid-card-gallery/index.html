@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grid Card Gallery — Gallery Responsif</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <a href="../../../index.html" class="back-link">← Kembali ke Daftar Exercise</a>
+
+    <header class="page-header">
+        <h1>🖼️ Grid Card Gallery</h1>
+        <p class="subtitle">Membangun gallery kartu responsif dengan CSS Grid</p>
+    </header>
+
+    <!-- TEORI -->
+    <section class="theory">
+        <h2>📖 Gallery dengan Grid — Teknik Populer</h2>
+        <p>Gallery kartu adalah pola yang paling sering ditemui di web: halaman produk, portfolio, blog posts, dan lainnya. Grid membuatnya sangat mudah!</p>
+
+        <div class="concept-box">
+            <h3>Teknik yang Digunakan</h3>
+            <ul>
+                <li><code>repeat(auto-fit, minmax())</code> — untuk responsif otomatis</li>
+                <li><code>grid-row: span 2</code> — untuk kartu "featured" yang lebih tinggi</li>
+                <li><code>grid-column: span 2</code> — untuk kartu yang lebih lebar</li>
+                <li>Kombinasi <code>auto-rows</code> — untuk baris otomatis yang konsisten</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- DEMO 1: Gallery Sederhana -->
+    <section class="demo-section">
+        <h2>🎯 Demo 1: Gallery Kartu Sederhana</h2>
+        <p>Gallery responsif dasar. Coba resize browser!</p>
+
+        <div class="gallery-simple">
+            <div class="card">
+                <div class="card-visual" style="background: linear-gradient(135deg, #e91e63, #f06292);">🌸</div>
+                <div class="card-content">
+                    <h4>Proyek Bunga</h4>
+                    <p>Design floral yang indah untuk branding.</p>
+                    <span class="tag">Design</span>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-visual" style="background: linear-gradient(135deg, #2196f3, #64b5f6);">🌊</div>
+                <div class="card-content">
+                    <h4>Proyek Laut</h4>
+                    <p>Website bertema laut dengan animasi wave.</p>
+                    <span class="tag">Web Dev</span>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-visual" style="background: linear-gradient(135deg, #4caf50, #81c784);">🌿</div>
+                <div class="card-content">
+                    <h4>Eco App</h4>
+                    <p>Aplikasi tracking carbon footprint.</p>
+                    <span class="tag">Mobile</span>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-visual" style="background: linear-gradient(135deg, #ff9800, #ffb74d);">🔥</div>
+                <div class="card-content">
+                    <h4>Fire Studio</h4>
+                    <p>Studio kreatif untuk motion graphics.</p>
+                    <span class="tag">Motion</span>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-visual" style="background: linear-gradient(135deg, #9c27b0, #ba68c8);">🎵</div>
+                <div class="card-content">
+                    <h4>Music Player</h4>
+                    <p>Audio player dengan visualizer.</p>
+                    <span class="tag">App</span>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-visual" style="background: linear-gradient(135deg, #607d8b, #90a4ae);">📸</div>
+                <div class="card-content">
+                    <h4>Photo Hub</h4>
+                    <p>Platform berbagi foto berkualitas tinggi.</p>
+                    <span class="tag">Platform</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="code-block">
+            <h4>CSS:</h4>
+            <pre><code>.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+/* Hanya 3 baris! Responsif sempurna tanpa media query. */</code></pre>
+        </div>
+    </section>
+
+    <!-- DEMO 2: Gallery dengan Featured -->
+    <section class="demo-section">
+        <h2>🎯 Demo 2: Gallery dengan Kartu Featured</h2>
+        <p>Beberapa kartu bisa lebih besar dari yang lain menggunakan <code>span</code>.</p>
+
+        <div class="gallery-featured">
+            <div class="card featured-wide">
+                <div class="card-visual" style="background: linear-gradient(135deg, #c62828, #ef5350);">⭐</div>
+                <div class="card-content">
+                    <h4>Proyek Utama — E-Commerce Platform</h4>
+                    <p>Full-stack e-commerce dengan Next.js, payment gateway, dan admin dashboard. Proyek flagship yang menunjukkan kemampuan penuh.</p>
+                    <span class="tag">Featured</span>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-visual" style="background: linear-gradient(135deg, #1565c0, #42a5f5);">💻</div>
+                <div class="card-content">
+                    <h4>Dev Tools</h4>
+                    <p>CLI tools untuk developer.</p>
+                    <span class="tag">Tools</span>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-visual" style="background: linear-gradient(135deg, #2e7d32, #66bb6a);">📊</div>
+                <div class="card-content">
+                    <h4>Analytics</h4>
+                    <p>Dashboard analytics real-time.</p>
+                    <span class="tag">Data</span>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-visual" style="background: linear-gradient(135deg, #e65100, #ff8a65);">🎨</div>
+                <div class="card-content">
+                    <h4>Design System</h4>
+                    <p>Komponen UI library.</p>
+                    <span class="tag">UI/UX</span>
+                </div>
+            </div>
+            <div class="card featured-tall">
+                <div class="card-visual tall" style="background: linear-gradient(135deg, #4a148c, #9c27b0);">🏆</div>
+                <div class="card-content">
+                    <h4>Award Winner</h4>
+                    <p>Proyek yang memenangkan hackathon nasional 2025.</p>
+                    <span class="tag">Award</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="code-block">
+            <h4>CSS:</h4>
+            <pre><code>.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-auto-rows: auto;
+    gap: 20px;
+}
+
+/* Kartu featured: lebar 2 kolom */
+.featured-wide { grid-column: span 2; }
+
+/* Kartu featured: tinggi 2 baris */
+.featured-tall { grid-row: span 2; }</code></pre>
+        </div>
+    </section>
+
+    <!-- DEMO 3: Masonry-like -->
+    <section class="demo-section">
+        <h2>🎯 Demo 3: Layout Masonry-Like</h2>
+        <p>Layout ala Pinterest/Masonry bisa didekati dengan <code>grid-auto-rows</code> dan <code>span</code>.</p>
+
+        <div class="gallery-masonry">
+            <div class="card masonry-1"><div class="card-visual" style="background: linear-gradient(135deg, #e91e63, #f06292); height:100%;">1</div></div>
+            <div class="card masonry-2"><div class="card-visual" style="background: linear-gradient(135deg, #2196f3, #64b5f6); height:100%;">2</div></div>
+            <div class="card masonry-3"><div class="card-visual" style="background: linear-gradient(135deg, #4caf50, #81c784); height:100%;">3</div></div>
+            <div class="card masonry-4"><div class="card-visual" style="background: linear-gradient(135deg, #ff9800, #ffb74d); height:100%;">4</div></div>
+            <div class="card masonry-5"><div class="card-visual" style="background: linear-gradient(135deg, #9c27b0, #ba68c8); height:100%;">5</div></div>
+            <div class="card masonry-6"><div class="card-visual" style="background: linear-gradient(135deg, #00bcd4, #4dd0e1); height:100%;">6</div></div>
+        </div>
+
+        <div class="code-block">
+            <h4>CSS:</h4>
+            <pre><code>.masonry {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: 80px;  /* baris kecil sebagai unit */
+    gap: 12px;
+}
+
+/* Setiap card span baris berbeda untuk efek masonry */
+.masonry-1 { grid-row: span 3; }  /* 240px */
+.masonry-2 { grid-row: span 2; }  /* 160px */
+.masonry-3 { grid-row: span 4; }  /* 320px */
+.masonry-4 { grid-row: span 2; }  /* 160px */
+.masonry-5 { grid-row: span 3; }  /* 240px */
+.masonry-6 { grid-row: span 2; }  /* 160px */</code></pre>
+        </div>
+
+        <div class="explanation">
+            <p>✅ <strong>Tips:</strong> Ini bukan masonry sempurna (untuk itu butuh JavaScript), tapi dengan <code>grid-auto-rows</code> kecil + <code>span</code> bervariasi, kita bisa mendekati efek masonry hanya dengan CSS!</p>
+        </div>
+    </section>
+
+    <div class="nav-buttons">
+        <a href="../grid-dashboard/" class="btn-prev">← Sebelumnya: Grid Dashboard</a>
+        <a href="../grid-flexbox-combo/" class="btn-next">Selanjutnya: Grid + Flexbox →</a>
+    </div>
+</body>
+
+</html>

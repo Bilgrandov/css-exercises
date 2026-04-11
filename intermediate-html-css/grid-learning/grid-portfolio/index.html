@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Website — Neocities-Style dari Scratch</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <a href="../../../index.html" class="back-link">← Kembali ke Daftar Exercise</a>
+
+    <header class="page-header">
+        <h1>🌐 Portfolio Website</h1>
+        <p class="subtitle">Membangun portfolio website ala Neocities dari scratch dengan Grid + Flexbox</p>
+    </header>
+
+    <!-- PENDAHULUAN -->
+    <section class="theory">
+        <h2>📖 Apa yang Akan Kita Bangun?</h2>
+        <p>Sebuah <strong>portfolio website personal</strong> yang bisa di-deploy ke Neocities, GitHub Pages, atau hosting manapun. Hanya HTML + CSS murni — tanpa framework!</p>
+
+        <div class="concept-box blueprint">
+            <h3>🗺️ Blueprint Portfolio</h3>
+            <pre class="blueprint-text">
+┌──────────────────────────────────────────────┐
+│  NAVBAR     [Logo]  [Home] [About] [Contact] │
+├──────────────────────────────────────────────┤
+│  HERO — Nama besar + tagline + tombol CTA    │
+├──────────────────────────────────────────────┤
+│  ABOUT — Foto + bio (2 kolom)                │
+├──────────────────────────────────────────────┤
+│  SKILLS — Grid kartu skill (auto-fit)        │
+├──────────────────────────────────────────────┤
+│  PROJECTS — Grid portfolio cards             │
+├──────────────────────────────────────────────┤
+│  CONTACT — Form sederhana (2 kolom)          │
+├──────────────────────────────────────────────┤
+│  FOOTER — links + copyright                  │
+└──────────────────────────────────────────────┘</pre>
+        </div>
+
+        <div class="concept-box">
+            <h3>Teknik yang Digunakan</h3>
+            <ul>
+                <li><strong>Grid</strong> — layout section (about 2 kolom, skills cards, projects gallery, footer)</li>
+                <li><strong>Flexbox</strong> — navbar, hero content, card internals, tombol groups</li>
+                <li><strong>auto-fit + minmax</strong> — responsif tanpa media query untuk cards</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         STEP 1: NAVBAR
+         ========================================== -->
+    <section class="step-section">
+        <div class="step-header">
+            <span class="step-number">1</span>
+            <div>
+                <h2>Navbar — Flexbox</h2>
+                <p class="step-desc">Logo di kiri, navigation links di kanan. Classic Flexbox pattern.</p>
+            </div>
+        </div>
+
+        <div class="code-block">
+            <h4>CSS:</h4>
+            <pre><code>.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 40px;
+    background: rgba(15, 23, 42, 0.95);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+}
+
+/* Flexbox untuk navbar:
+   → 1 dimensi (horizontal)
+   → space-between mendistribusikan logo & links
+   → gap mengatur jarak antar link */</code></pre>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         STEP 2: HERO
+         ========================================== -->
+    <section class="step-section">
+        <div class="step-header">
+            <span class="step-number">2</span>
+            <div>
+                <h2>Hero Section — Flexbox Column Center</h2>
+                <p class="step-desc">Konten ditengahkan sempurna secara vertikal dan horizontal.</p>
+            </div>
+        </div>
+
+        <div class="code-block">
+            <h4>CSS:</h4>
+            <pre><code>.hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 80vh;
+    text-align: center;
+    padding: 40px;
+}
+
+.hero-buttons {
+    display: flex;    /* Tombol-tombol bersebelahan */
+    gap: 16px;
+    margin-top: 32px;
+}
+
+/* Flexbox column + center:
+   → Pattern paling umum untuk hero section
+   → min-height: 80vh memastikan hero cukup tinggi
+   → Semua konten otomatis di tengah */</code></pre>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         STEP 3: ABOUT
+         ========================================== -->
+    <section class="step-section">
+        <div class="step-header">
+            <span class="step-number">3</span>
+            <div>
+                <h2>About Section — Grid 2 Kolom</h2>
+                <p class="step-desc">Foto di kiri, bio di kanan. Grid cocok karena ini layout 2 dimensi.</p>
+            </div>
+        </div>
+
+        <div class="code-block">
+            <h4>CSS:</h4>
+            <pre><code>.about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 40px;
+    align-items: center;
+}
+
+/* Kenapa Grid dan bukan Flexbox?
+   → Kita mengontrol proporsi kolom (1fr vs 1.5fr)
+   → align-items: center membuat foto & teks sejajar tengah
+   → Grid memberikan kontrol presisi untuk layout 2 kolom */</code></pre>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         STEP 4: SKILLS
+         ========================================== -->
+    <section class="step-section">
+        <div class="step-header">
+            <span class="step-number">4</span>
+            <div>
+                <h2>Skills — Grid Auto-Fit + Flexbox Cards</h2>
+                <p class="step-desc">Kartu skills responsif. Grid mengatur tata letak, Flexbox mengatur isi kartu.</p>
+            </div>
+        </div>
+
+        <div class="code-block">
+            <h4>CSS:</h4>
+            <pre><code>/* GRID — layout kartu responsif */
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+/* FLEXBOX — isi dalam kartu */
+.skill-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 30px 20px;
+}
+
+/* Combo pattern:
+   Grid (luar) → berapa kolom, responsif otomatis
+   Flexbox (dalam) → isi kartu tersusun vertikal */</code></pre>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         STEP 5: PROJECTS
+         ========================================== -->
+    <section class="step-section">
+        <div class="step-header">
+            <span class="step-number">5</span>
+            <div>
+                <h2>Projects — Grid Gallery + Flexbox Cards</h2>
+                <p class="step-desc">Sama seperti skills — Grid untuk gallery, Flexbox untuk card content.</p>
+            </div>
+        </div>
+
+        <div class="code-block">
+            <h4>CSS:</h4>
+            <pre><code>/* GRID — gallery layout */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+}
+
+/* FLEXBOX — card isi */
+.project-card {
+    display: flex;
+    flex-direction: column;
+}
+
+.project-info {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    flex: 1;    /* mengisi sisa ruang */
+}
+
+.project-tags {
+    display: flex;         /* tags bersebelahan */
+    flex-wrap: wrap;       /* wrap ke baris baru jika penuh */
+    gap: 8px;
+    margin-top: auto;      /* dorong ke bawah */
+}</code></pre>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         STEP 6: CONTACT + FOOTER
+         ========================================== -->
+    <section class="step-section">
+        <div class="step-header">
+            <span class="step-number">6</span>
+            <div>
+                <h2>Contact & Footer</h2>
+                <p class="step-desc">Contact form 2 kolom dengan Grid. Footer columns juga Grid.</p>
+            </div>
+        </div>
+
+        <div class="code-block">
+            <h4>CSS:</h4>
+            <pre><code>/* Contact — Grid 2 kolom */
+.contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.message-field {
+    grid-column: 1 / -1;  /* textarea full width */
+}
+
+/* Footer — Grid untuk kolom */
+.footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 30px;
+}
+
+/* Flexbox dalam footer columns */
+.footer-col {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}</code></pre>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         HASIL AKHIR
+         ========================================== -->
+    <section class="step-section final-section">
+        <div class="step-header">
+            <span class="step-number">✅</span>
+            <div>
+                <h2>Hasil Akhir — Portfolio Lengkap!</h2>
+                <p class="step-desc">Semua section digabungkan jadi satu halaman portfolio yang cantik. Scroll ke bawah!</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================
+         FULL PORTFOLIO WEBSITE DEMO
+         ================================================ -->
+    <div class="portfolio-demo">
+
+        <!-- NAVBAR -->
+        <nav class="pf-navbar">
+            <div class="pf-logo">✨ Bilgran</div>
+            <ul class="pf-nav-links">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Projects</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+
+        <!-- HERO -->
+        <section class="pf-hero">
+            <p class="pf-hero-greeting">Halo, saya 👋</p>
+            <h1 class="pf-hero-name">Bilgran</h1>
+            <p class="pf-hero-tagline">Web Developer & Designer — Membuat website yang indah dan fungsional</p>
+            <div class="pf-hero-buttons">
+                <a href="#" class="pf-btn primary">Lihat Projects</a>
+                <a href="#" class="pf-btn secondary">Contact Me</a>
+            </div>
+        </section>
+
+        <!-- ABOUT -->
+        <section class="pf-section">
+            <h2 class="pf-section-title">👤 About Me</h2>
+            <div class="pf-about-grid">
+                <div class="pf-about-photo">
+                    <div class="pf-avatar-large">B</div>
+                </div>
+                <div class="pf-about-text">
+                    <h3>Seorang developer yang passionate</h3>
+                    <p>Saya seorang web developer yang sedang belajar dan terus berkembang. Saya suka membuat tampilan web yang menarik menggunakan HTML, CSS, dan JavaScript.</p>
+                    <p>Saat ini sedang fokus mempelajari CSS Grid dan Flexbox untuk membuat layout yang responsif dan modern.</p>
+                    <div class="pf-about-stats">
+                        <div class="pf-about-stat">
+                            <strong>10+</strong>
+                            <span>Projects</span>
+                        </div>
+                        <div class="pf-about-stat">
+                            <strong>5+</strong>
+                            <span>Skills</span>
+                        </div>
+                        <div class="pf-about-stat">
+                            <strong>2026</strong>
+                            <span>Journey Start</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SKILLS -->
+        <section class="pf-section pf-section-alt">
+            <h2 class="pf-section-title">🛠️ Skills</h2>
+            <div class="pf-skills-grid">
+                <div class="pf-skill-card">
+                    <span class="pf-skill-icon">🌐</span>
+                    <h4>HTML5</h4>
+                    <p>Struktur semantik, accessibility</p>
+                    <div class="pf-skill-bar"><div class="pf-skill-fill" style="width: 85%;"></div></div>
+                </div>
+                <div class="pf-skill-card">
+                    <span class="pf-skill-icon">🎨</span>
+                    <h4>CSS3</h4>
+                    <p>Grid, Flexbox, Animations</p>
+                    <div class="pf-skill-bar"><div class="pf-skill-fill" style="width: 80%;"></div></div>
+                </div>
+                <div class="pf-skill-card">
+                    <span class="pf-skill-icon">⚡</span>
+                    <h4>JavaScript</h4>
+                    <p>DOM, ES6+, async/await</p>
+                    <div class="pf-skill-bar"><div class="pf-skill-fill" style="width: 65%;"></div></div>
+                </div>
+                <div class="pf-skill-card">
+                    <span class="pf-skill-icon">📱</span>
+                    <h4>Responsive</h4>
+                    <p>Mobile-first design</p>
+                    <div class="pf-skill-bar"><div class="pf-skill-fill" style="width: 75%;"></div></div>
+                </div>
+                <div class="pf-skill-card">
+                    <span class="pf-skill-icon">🔧</span>
+                    <h4>Git</h4>
+                    <p>Version control, GitHub</p>
+                    <div class="pf-skill-bar"><div class="pf-skill-fill" style="width: 70%;"></div></div>
+                </div>
+                <div class="pf-skill-card">
+                    <span class="pf-skill-icon">🎯</span>
+                    <h4>UI/UX</h4>
+                    <p>Design thinking, wireframing</p>
+                    <div class="pf-skill-bar"><div class="pf-skill-fill" style="width: 60%;"></div></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROJECTS -->
+        <section class="pf-section">
+            <h2 class="pf-section-title">🚀 Projects</h2>
+            <div class="pf-projects-grid">
+                <div class="pf-project-card">
+                    <div class="pf-project-img" style="background: linear-gradient(135deg, #667eea, #764ba2);">
+                        <span>🛒</span>
+                    </div>
+                    <div class="pf-project-info">
+                        <h4>E-Commerce Store</h4>
+                        <p>Toko online dengan shopping cart dan payment gateway integration.</p>
+                        <div class="pf-project-tags">
+                            <span class="pf-tag">HTML</span>
+                            <span class="pf-tag">CSS</span>
+                            <span class="pf-tag">JS</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="pf-project-card">
+                    <div class="pf-project-img" style="background: linear-gradient(135deg, #f093fb, #f5576c);">
+                        <span>🎵</span>
+                    </div>
+                    <div class="pf-project-info">
+                        <h4>Music Player</h4>
+                        <p>Audio player dengan playlist management dan visualizer.</p>
+                        <div class="pf-project-tags">
+                            <span class="pf-tag">CSS</span>
+                            <span class="pf-tag">JS</span>
+                            <span class="pf-tag">API</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="pf-project-card">
+                    <div class="pf-project-img" style="background: linear-gradient(135deg, #4facfe, #00f2fe);">
+                        <span>📊</span>
+                    </div>
+                    <div class="pf-project-info">
+                        <h4>Dashboard App</h4>
+                        <p>Admin dashboard dengan chart, tabel data, dan analytics.</p>
+                        <div class="pf-project-tags">
+                            <span class="pf-tag">Grid</span>
+                            <span class="pf-tag">Flexbox</span>
+                            <span class="pf-tag">JS</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="pf-project-card">
+                    <div class="pf-project-img" style="background: linear-gradient(135deg, #43e97b, #38f9d7);">
+                        <span>🌿</span>
+                    </div>
+                    <div class="pf-project-info">
+                        <h4>Eco Tracker</h4>
+                        <p>Aplikasi tracking carbon footprint dengan data visualization.</p>
+                        <div class="pf-project-tags">
+                            <span class="pf-tag">HTML</span>
+                            <span class="pf-tag">CSS</span>
+                            <span class="pf-tag">Chart.js</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT -->
+        <section class="pf-section pf-section-alt">
+            <h2 class="pf-section-title">📬 Contact</h2>
+            <div class="pf-contact-wrapper">
+                <p class="pf-contact-desc">Tertarik untuk bekerja sama? Kirim pesan!</p>
+                <form class="pf-contact-form">
+                    <div class="pf-form-grid">
+                        <div class="pf-field">
+                            <label>Nama</label>
+                            <input type="text" placeholder="Nama kamu" disabled>
+                        </div>
+                        <div class="pf-field">
+                            <label>Email</label>
+                            <input type="email" placeholder="email@contoh.com" disabled>
+                        </div>
+                        <div class="pf-field full-width">
+                            <label>Subject</label>
+                            <input type="text" placeholder="Topik pesan" disabled>
+                        </div>
+                        <div class="pf-field full-width">
+                            <label>Pesan</label>
+                            <textarea placeholder="Tulis pesanmu..." rows="4" disabled></textarea>
+                        </div>
+                    </div>
+                    <button type="button" class="pf-btn primary" style="margin-top: 16px;">Kirim Pesan ✉️</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer class="pf-footer">
+            <div class="pf-footer-grid">
+                <div class="pf-footer-col">
+                    <h4>✨ Bilgran</h4>
+                    <p>Web developer yang passionate. Membuat web modern dan indah dari Indonesia.</p>
+                </div>
+                <div class="pf-footer-col">
+                    <h4>Links</h4>
+                    <a href="#">Home</a>
+                    <a href="#">About</a>
+                    <a href="#">Projects</a>
+                    <a href="#">Contact</a>
+                </div>
+                <div class="pf-footer-col">
+                    <h4>Social</h4>
+                    <a href="#">GitHub</a>
+                    <a href="#">Twitter</a>
+                    <a href="#">LinkedIn</a>
+                    <a href="#">Instagram</a>
+                </div>
+                <div class="pf-footer-col">
+                    <h4>Resources</h4>
+                    <a href="#">Blog</a>
+                    <a href="#">Resume</a>
+                    <a href="#">Neocities</a>
+                </div>
+            </div>
+            <div class="pf-footer-bottom">
+                <span>© 2026 Bilgran — Built with Grid + Flexbox 💪</span>
+            </div>
+        </footer>
+    </div>
+
+    <!-- PETA PENGGUNAAN -->
+    <section class="step-section" style="margin-top: 30px;">
+        <div class="step-header">
+            <span class="step-number">📝</span>
+            <div>
+                <h2>Peta Grid vs Flexbox di Portfolio</h2>
+                <p class="step-desc">Breakdown lengkap teknik yang digunakan di setiap section.</p>
+            </div>
+        </div>
+
+        <div class="code-block">
+            <h4>Peta:</h4>
+            <pre><code>PORTFOLIO
+│
+├── NAVBAR ──────── Flexbox (row, space-between)
+│    → Logo kiri | Links kanan
+│
+├── HERO ────────── Flexbox (column, center)
+│    → Semua konten di tengah + tombol-tombol
+│
+├── ABOUT ───────── Grid (1fr 1.5fr)
+│    → 2 kolom: foto kiri, teks kanan
+│    └── Stats ── Flexbox (row) → 3 angka sejajar
+│
+├── SKILLS ──────── Grid (auto-fit, minmax 200px)
+│    → Responsif otomatis 2-3-4 kolom
+│    └── Card ── Flexbox (column, center)
+│
+├── PROJECTS ────── Grid (auto-fit, minmax 300px)
+│    → Gallery responsif
+│    └── Card ── Flexbox (column)
+│        └── Tags ── Flexbox (row, wrap)
+│
+├── CONTACT ─────── Grid (2 kolom form)
+│    → Nama | Email (2 kolom)
+│    → Subject | Pesan (full width via span)
+│
+└── FOOTER ──────── Grid (2fr 1fr 1fr 1fr)
+     → Brand besar | 3 kolom links
+     └── Cols ── Flexbox (column) → links vertikal</code></pre>
+        </div>
+
+        <div class="why-box" style="margin-top: 16px;">
+            <h4>🎯 Tips Deploy ke Neocities</h4>
+            <ul>
+                <li>Neocities menghosting file statis — HTML + CSS langsung bisa di-upload</li>
+                <li>Buat file <code>index.html</code> + <code>style.css</code> lalu upload ke neocities.org</li>
+                <li>Ganti konten placeholder dengan info kamu sendiri</li>
+                <li>Website kamu akan live di <code>username.neocities.org</code></li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- SELAMAT -->
+    <section class="theory">
+        <div class="concept-box" style="border-left-color: #fbbf24;">
+            <h3 style="color: #fbbf24;">🎓 Kamu Sekarang Bisa Membangun Website dari Scratch!</h3>
+            <p>Melalui 2 exercise terakhir ini, kamu sudah belajar:</p>
+            <ol style="padding-left: 20px; margin-top: 10px;">
+                <li>Cara <strong>merencanakan layout</strong> sebelum coding (blueprint)</li>
+                <li>Kapan pakai <strong>Grid</strong> (layout 2D, gallery, form grid) vs <strong>Flexbox</strong> (navbar, centered content, item alignment)</li>
+                <li>Cara membangun <strong>dashboard admin</strong> profesional</li>
+                <li>Cara membangun <strong>portfolio website</strong> yang bisa di-deploy</li>
+            </ol>
+            <p style="margin-top: 12px;">Sekarang coba buat versi kamu sendiri — ubah warna, konten, dan layout sesuai style kamu! 🚀</p>
+        </div>
+    </section>
+
+    <div class="nav-buttons">
+        <a href="../grid-dashboard-scratch/" class="btn-prev">← Sebelumnya: Dashboard Scratch</a>
+        <a href="../../../index.html" class="btn-next">🏠 Kembali ke Home</a>
+    </div>
+</body>
+
+</html>

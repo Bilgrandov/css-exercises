@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard From Scratch — Membangun Dashboard Step by Step</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <a href="../../../index.html" class="back-link">← Kembali ke Daftar Exercise</a>
+
+    <header class="page-header">
+        <h1>🏗️ Dashboard From Scratch</h1>
+        <p class="subtitle">Membangun admin dashboard selangkah demi selangkah dengan Grid + Flexbox</p>
+    </header>
+
+    <!-- PENDAHULUAN -->
+    <section class="theory">
+        <h2>📖 Apa yang Akan Kita Bangun?</h2>
+        <p>Kita akan membangun sebuah <strong>admin dashboard</strong> lengkap dari nol. Setiap langkah dijelaskan alasan dan tekniknya. Di akhir, kamu akan punya dashboard profesional!</p>
+
+        <div class="concept-box blueprint">
+            <h3>🗺️ Blueprint Dashboard</h3>
+            <pre class="blueprint-text">
+┌──────────────────────────────────────────────┐
+│  HEADER (logo + search + profile)            │
+├──────────┬───────────────────────────────────┤
+│          │  STATS CARDS (4 kartu)            │
+│  SIDE    ├───────────────────────────────────┤
+│  BAR     │  CHART BESAR    │  TABEL DATA    │
+│          ├─────────────────┤                 │
+│  (menu)  │  RECENT         │                 │
+│          │  ACTIVITY       │                 │
+├──────────┴───────────────────────────────────┤
+│  FOOTER                                      │
+└──────────────────────────────────────────────┘</pre>
+            <p style="margin-top: 10px;">Teknologi: <strong>Grid</strong> untuk layout utama + kartu stats. <strong>Flexbox</strong> untuk header, sidebar items, dan konten dalam kartu.</p>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         STEP 1: STRUKTUR HTML
+         ========================================== -->
+    <section class="step-section">
+        <div class="step-header">
+            <span class="step-number">1</span>
+            <div>
+                <h2>Struktur HTML Dasar</h2>
+                <p class="step-desc">Pertama, kita buat kerangka HTML — semua elemen utama dashboard.</p>
+            </div>
+        </div>
+
+        <div class="code-block">
+            <h4>HTML:</h4>
+            <pre><code>&lt;div class="dashboard"&gt;
+    &lt;header class="header"&gt;...&lt;/header&gt;
+    &lt;aside class="sidebar"&gt;...&lt;/aside&gt;
+    &lt;main class="main-content"&gt;...&lt;/main&gt;
+    &lt;footer class="footer"&gt;...&lt;/footer&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+
+        <div class="why-box">
+            <h4>🤔 Kenapa HTML semantik?</h4>
+            <p><code>&lt;header&gt;</code>, <code>&lt;aside&gt;</code>, <code>&lt;main&gt;</code>, <code>&lt;footer&gt;</code> — menggunakan tag semantik bukan hanya <code>&lt;div&gt;</code> membuat kode lebih mudah dibaca dan bagus untuk accessibility.</p>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         STEP 2: GRID LAYOUT UTAMA
+         ========================================== -->
+    <section class="step-section">
+        <div class="step-header">
+            <span class="step-number">2</span>
+            <div>
+                <h2>Grid Layout Utama</h2>
+                <p class="step-desc">Ini "tulang punggung" layout kita — menggunakan <code>grid-template-areas</code>.</p>
+            </div>
+        </div>
+
+        <div class="code-block">
+            <h4>CSS — Layout utama:</h4>
+            <pre><code>.dashboard {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    grid-template-rows: 64px 1fr 48px;
+    grid-template-areas:
+        "header  header"
+        "sidebar main"
+        "sidebar footer";
+    height: 100vh;
+}
+
+/* Kenapa grid-template-areas?
+   → Kita bisa "menggambar" layout secara visual
+   → Mudah diubah tanpa hitung nomor garis
+   → Sidebar merentang 2 baris (main + footer) */
+
+.header       { grid-area: header; }
+.sidebar      { grid-area: sidebar; }
+.main-content { grid-area: main; }
+.footer       { grid-area: footer; }</code></pre>
+        </div>
+
+        <div class="step-result">
+            <h4>Hasil Step 2:</h4>
+            <div class="mini-dashboard step2">
+                <div class="mini-header">Header</div>
+                <div class="mini-sidebar">Sidebar</div>
+                <div class="mini-main">Main Content</div>
+                <div class="mini-footer">Footer</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         STEP 3: HEADER DENGAN FLEXBOX
+         ========================================== -->
+    <section class="step-section">
+        <div class="step-header">
+            <span class="step-number">3</span>
+            <div>
+                <h2>Header — Flexbox untuk Navbar</h2>
+                <p class="step-desc">Header punya 3 bagian: logo (kiri), search (tengah), profile (kanan). Flexbox sempurna untuk ini!</p>
+            </div>
+        </div>
+
+        <div class="code-block">
+            <h4>CSS — Header dengan Flexbox:</h4>
+            <pre><code>.header {
+    display: flex;                /* Flexbox! */
+    align-items: center;          /* vertikal tengah */
+    justify-content: space-between; /* logo kiri, profile kanan */
+    padding: 0 24px;
+    background: #1e293b;
+}
+
+/* Kenapa Flexbox dan bukan Grid?
+   → Header adalah satu baris (1 dimensi)
+   → Item harus distributed secara fleksibel
+   → space-between perfect untuk navbar pattern */
+
+.search-box {
+    display: flex;     /* Flexbox lagi! Untuk icon + input */
+    align-items: center;
+    gap: 8px;
+}</code></pre>
+        </div>
+
+        <div class="step-result">
+            <h4>Hasil Step 3:</h4>
+            <div class="demo-header">
+                <div class="demo-logo">📊 AdminPanel</div>
+                <div class="demo-search">
+                    <span>🔍</span>
+                    <input type="text" placeholder="Search..." disabled>
+                </div>
+                <div class="demo-profile">
+                    <span>🔔</span>
+                    <div class="demo-avatar">B</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         STEP 4: SIDEBAR DENGAN FLEXBOX
+         ========================================== -->
+    <section class="step-section">
+        <div class="step-header">
+            <span class="step-number">4</span>
+            <div>
+                <h2>Sidebar — Flexbox Column untuk Menu</h2>
+                <p class="step-desc">Sidebar berisi menu vertikal. Flexbox <code>column</code> mengatur menu items + mendorong logout ke bawah.</p>
+            </div>
+        </div>
+
+        <div class="code-block">
+            <h4>CSS — Sidebar dengan Flexbox:</h4>
+            <pre><code>.sidebar {
+    display: flex;
+    flex-direction: column;   /* menu vertikal */
+    background: #0f172a;
+    padding: 16px 0;
+    overflow-y: auto;
+}
+
+.sidebar-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;    /* mengisi ruang tersedia */
+}
+
+.sidebar-bottom {
+    margin-top: auto;  /* ⭐ Trik Flexbox: dorong ke bawah! */
+    padding: 16px;
+}
+
+/* Teknik margin-top: auto di Flexbox column
+   sangat populer untuk menaruh item terakhir
+   di bagian bawah container. */</code></pre>
+        </div>
+
+        <div class="step-result">
+            <h4>Hasil Step 4:</h4>
+            <div class="demo-sidebar">
+                <div class="demo-sidebar-menu">
+                    <div class="demo-menu-item active">📊 Dashboard</div>
+                    <div class="demo-menu-item">👥 Users</div>
+                    <div class="demo-menu-item">📦 Products</div>
+                    <div class="demo-menu-item">💰 Revenue</div>
+                    <div class="demo-menu-item">📋 Orders</div>
+                </div>
+                <div class="demo-sidebar-bottom">
+                    <div class="demo-menu-item logout">🚪 Logout</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         STEP 5: STATS CARDS DENGAN GRID
+         ========================================== -->
+    <section class="step-section">
+        <div class="step-header">
+            <span class="step-number">5</span>
+            <div>
+                <h2>Stats Cards — Grid Auto-Fit</h2>
+                <p class="step-desc">Kartu statistik responsif. Grid <code>auto-fit</code> mengatur jumlah kolom otomatis, Flexbox mengatur isi kartu.</p>
+            </div>
+        </div>
+
+        <div class="code-block">
+            <h4>CSS — Stats Grid:</h4>
+            <pre><code>/* GRID untuk layout kartu */
+.stats-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+    margin-bottom: 24px;
+}
+
+/* FLEXBOX untuk isi kartu */
+.stat-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 20px;
+    background: #1e293b;
+    border-radius: 12px;
+}
+
+/* Kenapa Grid + Flexbox?
+   Grid → mengatur POSISI kartu (berapa kolom, responsif)
+   Flexbox → mengatur ISI kartu (icon + teks sejajar) */</code></pre>
+        </div>
+
+        <div class="step-result">
+            <h4>Hasil Step 5:</h4>
+            <div class="demo-stats">
+                <div class="demo-stat-card">
+                    <div class="demo-stat-icon" style="background: #3b82f6;">👥</div>
+                    <div>
+                        <span class="demo-stat-label">Total Users</span>
+                        <span class="demo-stat-value">12,543</span>
+                    </div>
+                </div>
+                <div class="demo-stat-card">
+                    <div class="demo-stat-icon" style="background: #10b981;">💰</div>
+                    <div>
+                        <span class="demo-stat-label">Revenue</span>
+                        <span class="demo-stat-value">$84,250</span>
+                    </div>
+                </div>
+                <div class="demo-stat-card">
+                    <div class="demo-stat-icon" style="background: #f59e0b;">📦</div>
+                    <div>
+                        <span class="demo-stat-label">Products</span>
+                        <span class="demo-stat-value">847</span>
+                    </div>
+                </div>
+                <div class="demo-stat-card">
+                    <div class="demo-stat-icon" style="background: #ef4444;">📈</div>
+                    <div>
+                        <span class="demo-stat-label">Growth</span>
+                        <span class="demo-stat-value">+24.5%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         STEP 6: CONTENT AREA DENGAN GRID
+         ========================================== -->
+    <section class="step-section">
+        <div class="step-header">
+            <span class="step-number">6</span>
+            <div>
+                <h2>Content Area — Grid 2 Kolom + span</h2>
+                <p class="step-desc">Area konten utama pakai Grid 2 kolom. Chart besar pakai <code>span 2</code>.</p>
+            </div>
+        </div>
+
+        <div class="code-block">
+            <h4>CSS — Content Grid:</h4>
+            <pre><code>.content-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 20px;
+}
+
+/* Chart besar menempati seluruh lebar */
+.chart-large {
+    grid-column: 1 / -1;  /* dari kiri sampai kanan */
+    /* Atau bisa: grid-column: span 2; */
+}
+
+/* -1 artinya "garis terakhir"
+   Teknik ini berguna jika jumlah kolom bisa berubah */</code></pre>
+        </div>
+
+        <div class="step-result">
+            <h4>Hasil Step 6:</h4>
+            <div class="demo-content-grid">
+                <div class="demo-widget full-width">
+                    <h4>📈 Sales Overview</h4>
+                    <div class="demo-chart">
+                        <div class="demo-bar" style="height: 40%;"></div>
+                        <div class="demo-bar" style="height: 65%;"></div>
+                        <div class="demo-bar" style="height: 55%;"></div>
+                        <div class="demo-bar" style="height: 80%;"></div>
+                        <div class="demo-bar" style="height: 70%;"></div>
+                        <div class="demo-bar" style="height: 90%;"></div>
+                        <div class="demo-bar" style="height: 50%;"></div>
+                        <div class="demo-bar" style="height: 75%;"></div>
+                    </div>
+                </div>
+                <div class="demo-widget">
+                    <h4>🕐 Recent Orders</h4>
+                    <div class="demo-list">
+                        <div class="demo-list-item">Order #1284 <span class="badge green">Completed</span></div>
+                        <div class="demo-list-item">Order #1283 <span class="badge yellow">Pending</span></div>
+                        <div class="demo-list-item">Order #1282 <span class="badge green">Completed</span></div>
+                        <div class="demo-list-item">Order #1281 <span class="badge red">Cancelled</span></div>
+                    </div>
+                </div>
+                <div class="demo-widget">
+                    <h4>🌍 Top Countries</h4>
+                    <div class="demo-list">
+                        <div class="demo-list-item">🇮🇩 Indonesia <strong>35%</strong></div>
+                        <div class="demo-list-item">🇺🇸 USA <strong>28%</strong></div>
+                        <div class="demo-list-item">🇯🇵 Japan <strong>18%</strong></div>
+                        <div class="demo-list-item">🇬🇧 UK <strong>12%</strong></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         STEP 7: FOOTER
+         ========================================== -->
+    <section class="step-section">
+        <div class="step-header">
+            <span class="step-number">7</span>
+            <div>
+                <h2>Footer — Flexbox Simple</h2>
+                <p class="step-desc">Footer sederhana dengan Flexbox: copyright kiri, links kanan.</p>
+            </div>
+        </div>
+
+        <div class="code-block">
+            <h4>CSS — Footer:</h4>
+            <pre><code>.footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px;
+    background: #0f172a;
+    font-size: 0.8em;
+    color: #64748b;
+}</code></pre>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         HASIL AKHIR
+         ========================================== -->
+    <section class="step-section final-section">
+        <div class="step-header">
+            <span class="step-number">✅</span>
+            <div>
+                <h2>Hasil Akhir — Dashboard Lengkap!</h2>
+                <p class="step-desc">Gabungan semua step di atas. Ini hasil dashboard kita!</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FULL DASHBOARD -->
+    <div class="final-dashboard">
+        <header class="fd-header">
+            <div class="fd-logo">📊 AdminPanel</div>
+            <div class="fd-search">
+                <span>🔍</span>
+                <input type="text" placeholder="Search anything..." disabled>
+            </div>
+            <div class="fd-profile">
+                <span class="fd-notif">🔔<span class="notif-dot"></span></span>
+                <div class="fd-avatar">B</div>
+                <span class="fd-name">Bilgran</span>
+            </div>
+        </header>
+
+        <aside class="fd-sidebar">
+            <div class="fd-menu">
+                <div class="fd-menu-item active"><span>📊</span> Dashboard</div>
+                <div class="fd-menu-item"><span>👥</span> Users</div>
+                <div class="fd-menu-item"><span>📦</span> Products</div>
+                <div class="fd-menu-item"><span>💰</span> Revenue</div>
+                <div class="fd-menu-item"><span>📋</span> Orders</div>
+                <div class="fd-menu-item"><span>📊</span> Analytics</div>
+                <div class="fd-menu-item"><span>⚙️</span> Settings</div>
+            </div>
+            <div class="fd-sidebar-bottom">
+                <div class="fd-menu-item logout"><span>🚪</span> Logout</div>
+            </div>
+        </aside>
+
+        <main class="fd-main">
+            <h2 class="fd-page-title">Dashboard Overview</h2>
+
+            <div class="fd-stats">
+                <div class="fd-stat">
+                    <div class="fd-stat-icon" style="background: #3b82f6;">👥</div>
+                    <div class="fd-stat-info">
+                        <span class="fd-stat-label">Total Users</span>
+                        <span class="fd-stat-value">12,543</span>
+                        <span class="fd-stat-change up">↑ 12.5%</span>
+                    </div>
+                </div>
+                <div class="fd-stat">
+                    <div class="fd-stat-icon" style="background: #10b981;">💰</div>
+                    <div class="fd-stat-info">
+                        <span class="fd-stat-label">Revenue</span>
+                        <span class="fd-stat-value">$84,250</span>
+                        <span class="fd-stat-change up">↑ 8.2%</span>
+                    </div>
+                </div>
+                <div class="fd-stat">
+                    <div class="fd-stat-icon" style="background: #f59e0b;">📦</div>
+                    <div class="fd-stat-info">
+                        <span class="fd-stat-label">Products</span>
+                        <span class="fd-stat-value">847</span>
+                        <span class="fd-stat-change up">↑ 3.1%</span>
+                    </div>
+                </div>
+                <div class="fd-stat">
+                    <div class="fd-stat-icon" style="background: #ef4444;">📈</div>
+                    <div class="fd-stat-info">
+                        <span class="fd-stat-label">Growth</span>
+                        <span class="fd-stat-value">+24.5%</span>
+                        <span class="fd-stat-change down">↓ 2.4%</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="fd-content">
+                <div class="fd-widget wide">
+                    <div class="fd-widget-header">
+                        <h3>📈 Sales Overview</h3>
+                        <select disabled><option>Last 7 days</option></select>
+                    </div>
+                    <div class="fd-chart">
+                        <div class="fd-bar" style="height: 40%;"><span>Mon</span></div>
+                        <div class="fd-bar" style="height: 65%;"><span>Tue</span></div>
+                        <div class="fd-bar" style="height: 55%;"><span>Wed</span></div>
+                        <div class="fd-bar" style="height: 80%;"><span>Thu</span></div>
+                        <div class="fd-bar" style="height: 70%;"><span>Fri</span></div>
+                        <div class="fd-bar" style="height: 90%;"><span>Sat</span></div>
+                        <div class="fd-bar" style="height: 50%;"><span>Sun</span></div>
+                    </div>
+                </div>
+                <div class="fd-widget">
+                    <div class="fd-widget-header"><h3>🕐 Recent Orders</h3></div>
+                    <div class="fd-order-list">
+                        <div class="fd-order"><span>#1284</span><span class="badge green">Done</span></div>
+                        <div class="fd-order"><span>#1283</span><span class="badge yellow">Pending</span></div>
+                        <div class="fd-order"><span>#1282</span><span class="badge green">Done</span></div>
+                        <div class="fd-order"><span>#1281</span><span class="badge red">Cancel</span></div>
+                        <div class="fd-order"><span>#1280</span><span class="badge green">Done</span></div>
+                    </div>
+                </div>
+                <div class="fd-widget">
+                    <div class="fd-widget-header"><h3>🌍 Top Traffic</h3></div>
+                    <div class="fd-traffic">
+                        <div class="fd-traffic-item"><span>🇮🇩 Indonesia</span><div class="fd-progress"><div class="fd-progress-fill" style="width:65%;"></div></div><span>35%</span></div>
+                        <div class="fd-traffic-item"><span>🇺🇸 USA</span><div class="fd-progress"><div class="fd-progress-fill" style="width:50%;"></div></div><span>28%</span></div>
+                        <div class="fd-traffic-item"><span>🇯🇵 Japan</span><div class="fd-progress"><div class="fd-progress-fill" style="width:35%;"></div></div><span>18%</span></div>
+                        <div class="fd-traffic-item"><span>🇬🇧 UK</span><div class="fd-progress"><div class="fd-progress-fill" style="width:22%;"></div></div><span>12%</span></div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="fd-footer">
+            <span>© 2026 AdminPanel — Built with Grid + Flexbox</span>
+            <div class="fd-footer-links">
+                <a href="#">Docs</a>
+                <a href="#">Support</a>
+                <a href="#">Privacy</a>
+            </div>
+        </footer>
+    </div>
+
+    <!-- PETA GRID + FLEXBOX -->
+    <section class="step-section" style="margin-top: 30px;">
+        <div class="step-header">
+            <span class="step-number">📝</span>
+            <div>
+                <h2>Peta Penggunaan Grid vs Flexbox</h2>
+                <p class="step-desc">Setiap bagian dashboard menggunakan Grid atau Flexbox — masing-masing untuk alasan spesifik.</p>
+            </div>
+        </div>
+
+        <div class="code-block">
+            <h4>Peta:</h4>
+            <pre><code>DASHBOARD
+├── .dashboard ──────── GRID (template-areas)
+│    → Layout utama: header | sidebar | main | footer
+│
+├── .header ─────────── FLEXBOX (row)
+│    → Logo | Search | Profile (space-between)
+│
+├── .sidebar ────────── FLEXBOX (column)
+│    → Menu items vertikal + logout di bawah (margin-top: auto)
+│
+├── .main-content
+│    ├── .stats-row ─── GRID (auto-fit)
+│    │    → 4 stat cards responsif
+│    │    └── .stat-card ── FLEXBOX (row)
+│    │         → Icon + info sejajar
+│    │
+│    └── .content-grid ── GRID (2fr 1fr)
+│         → Widget chart + orders + traffic
+│         └── .widget ── FLEXBOX (column)
+│              → Header + content
+│
+└── .footer ─────────── FLEXBOX (row)
+     → Copyright | Links (space-between)</code></pre>
+        </div>
+
+        <div class="why-box" style="margin-top: 16px;">
+            <h4>🎯 Aturan Emas</h4>
+            <ul>
+                <li><strong>Grid</strong> ketika kamu perlu mengatur layout 2D (baris + kolom sekaligus)</li>
+                <li><strong>Flexbox</strong> ketika kamu mengatur item dalam satu baris atau satu kolom</li>
+                <li><strong>Grid auto-fit</strong> ketika kamu mau layout yang responsif otomatis</li>
+                <li><strong>Flexbox margin-top: auto</strong> ketika kamu mau mendorong item ke bawah/kanan</li>
+            </ul>
+        </div>
+    </section>
+
+    <div class="nav-buttons">
+        <a href="../grid-flexbox-combo/" class="btn-prev">← Sebelumnya: Grid+Flexbox Combo</a>
+        <a href="../grid-portfolio/" class="btn-next">Selanjutnya: Portfolio Website →</a>
+    </div>
+</body>
+
+</html>

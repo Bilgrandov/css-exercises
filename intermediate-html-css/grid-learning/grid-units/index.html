@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grid Units — fr, repeat(), minmax()</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <a href="../../../index.html" class="back-link">← Kembali ke Daftar Exercise</a>
+
+    <header class="page-header">
+        <h1>📏 Grid Units</h1>
+        <p class="subtitle">Menguasai <code>fr</code>, <code>repeat()</code>, <code>minmax()</code>, dan pencampuran unit</p>
+    </header>
+
+    <!-- TEORI -->
+    <section class="theory">
+        <h2>📖 Kenapa Perlu Unit Khusus Grid?</h2>
+        <p>Menggunakan <code>px</code> saja untuk kolom membuat layout kaku. CSS Grid punya unit dan fungsi khusus yang membuat layout <strong>fleksibel dan responsif</strong>.</p>
+
+        <div class="concept-box">
+            <h3>Unit & Fungsi Grid</h3>
+            <ul>
+                <li><code>fr</code> — <em>fraction</em>, membagi ruang sisa secara proporsional</li>
+                <li><code>repeat(n, size)</code> — mengulang pola kolom/baris sebanyak n kali</li>
+                <li><code>minmax(min, max)</code> — ukuran minimal dan maksimal</li>
+                <li><code>auto</code> — menyesuaikan dengan konten</li>
+            </ul>
+        </div>
+
+        <div class="concept-box analogy">
+            <h3>🎯 Analogi fr</h3>
+            <p>Bayangkan kamu punya <strong>pizza</strong> sisa setelah dipotong bagian tetap. <code>1fr</code> = satu bagian dari pizza sisa. <code>2fr</code> = dua bagian. Jadi <code>1fr 2fr</code> berarti kolom kedua 2x lebih lebar dari kolom pertama!</p>
+        </div>
+    </section>
+
+    <!-- DEMO 1: FR UNIT -->
+    <section class="demo-section">
+        <h2>🎯 Demo 1: Unit fr (fraction)</h2>
+        <p>Membagi ruang secara proporsional. Jauh lebih fleksibel dari px!</p>
+
+        <h3>grid-template-columns: 1fr 1fr 1fr (sama rata)</h3>
+        <div class="demo-container grid-fr-equal">
+            <div class="grid-item">1fr</div>
+            <div class="grid-item">1fr</div>
+            <div class="grid-item">1fr</div>
+        </div>
+
+        <h3>grid-template-columns: 1fr 2fr 1fr (tengah 2x lebih lebar)</h3>
+        <div class="demo-container grid-fr-varied">
+            <div class="grid-item">1fr</div>
+            <div class="grid-item">2fr</div>
+            <div class="grid-item">1fr</div>
+        </div>
+
+        <h3>grid-template-columns: 1fr 3fr (sidebar + konten)</h3>
+        <div class="demo-container grid-fr-sidebar">
+            <div class="grid-item">1fr<br>Sidebar</div>
+            <div class="grid-item">3fr<br>Konten Utama</div>
+        </div>
+
+        <div class="code-block">
+            <h4>CSS:</h4>
+            <pre><code>/* Sama rata — masing-masing 1/3 dari ruang */
+.equal { grid-template-columns: 1fr 1fr 1fr; }
+
+/* Tengah 2x lebih lebar — 1/4, 2/4, 1/4 */
+.varied { grid-template-columns: 1fr 2fr 1fr; }
+
+/* Sidebar + konten — 1/4 dan 3/4 */
+.sidebar { grid-template-columns: 1fr 3fr; }</code></pre>
+        </div>
+
+        <div class="explanation">
+            <p>✅ <strong>Cara kerja fr:</strong> Pertama Grid menghitung total fr (misal 1+2+1=4). Lalu bagi ruang tersedia: kolom 2fr dapat 2/4 = 50% dari ruang. Coba resize browser — kolom akan ikut berubah!</p>
+        </div>
+    </section>
+
+    <!-- DEMO 2: REPEAT() -->
+    <section class="demo-section">
+        <h2>🎯 Demo 2: Fungsi repeat()</h2>
+        <p>Daripada menulis <code>1fr 1fr 1fr 1fr</code>, gunakan <code>repeat(4, 1fr)</code>!</p>
+
+        <h3>repeat(4, 1fr) — 4 kolom sama rata</h3>
+        <div class="demo-container grid-repeat-4">
+            <div class="grid-item">1</div>
+            <div class="grid-item">2</div>
+            <div class="grid-item">3</div>
+            <div class="grid-item">4</div>
+        </div>
+
+        <h3>repeat(3, 1fr 2fr) — pola berulang: kecil besar kecil besar...</h3>
+        <div class="demo-container grid-repeat-pattern">
+            <div class="grid-item">1fr</div>
+            <div class="grid-item">2fr</div>
+            <div class="grid-item">1fr</div>
+            <div class="grid-item">2fr</div>
+            <div class="grid-item">1fr</div>
+            <div class="grid-item">2fr</div>
+        </div>
+
+        <div class="code-block">
+            <h4>CSS:</h4>
+            <pre><code>/* 4 kolom sama rata */
+.grid-4 { grid-template-columns: repeat(4, 1fr); }
+
+/* Pola berulang: 1fr 2fr 1fr 2fr 1fr 2fr */
+.grid-pattern { grid-template-columns: repeat(3, 1fr 2fr); }</code></pre>
+        </div>
+
+        <div class="explanation">
+            <p>✅ <strong>Tips:</strong> <code>repeat()</code> sangat berguna ketika kamu punya banyak kolom dengan ukuran sama. Kamu juga bisa mengulang pola — <code>repeat(3, 1fr 2fr)</code> = 6 kolom!</p>
+        </div>
+    </section>
+
+    <!-- DEMO 3: MINMAX() -->
+    <section class="demo-section">
+        <h2>🎯 Demo 3: Fungsi minmax()</h2>
+        <p>Mengatur ukuran minimum dan maksimum sebuah kolom. Sangat penting untuk layout responsif!</p>
+
+        <h3>grid-template-columns: minmax(150px, 1fr) minmax(250px, 2fr) minmax(150px, 1fr)</h3>
+        <div class="demo-container grid-minmax">
+            <div class="grid-item">min 150px<br>max 1fr</div>
+            <div class="grid-item">min 250px<br>max 2fr</div>
+            <div class="grid-item">min 150px<br>max 1fr</div>
+        </div>
+
+        <div class="code-block">
+            <h4>CSS:</h4>
+            <pre><code>.container {
+    display: grid;
+    grid-template-columns:
+        minmax(150px, 1fr)
+        minmax(250px, 2fr)
+        minmax(150px, 1fr);
+    gap: 10px;
+}</code></pre>
+        </div>
+
+        <div class="explanation">
+            <p>✅ <strong>Cara kerja:</strong> Kolom tidak akan pernah lebih kecil dari nilai minimum (150px/250px), tapi akan melebar mengikuti fr ketika ada ruang. Coba resize browser!</p>
+        </div>
+    </section>
+
+    <!-- DEMO 4: MIXING UNITS -->
+    <section class="demo-section">
+        <h2>🎯 Demo 4: Mencampur Unit</h2>
+        <p>Kekuatan grid! Kamu bisa mencampur px, fr, auto, dan minmax() dalam satu baris.</p>
+
+        <h3>250px (tetap) + 1fr (fleksibel) + auto (sesuai konten)</h3>
+        <div class="demo-container grid-mix">
+            <div class="grid-item">250px<br>Sidebar tetap</div>
+            <div class="grid-item">1fr<br>Konten mengisi sisa ruang</div>
+            <div class="grid-item" style="font-size: 0.8em;">auto<br>Sesuai konten</div>
+        </div>
+
+        <h3>200px + repeat(2, 1fr) + minmax(100px, 200px)</h3>
+        <div class="demo-container grid-mix-complex">
+            <div class="grid-item">200px</div>
+            <div class="grid-item">1fr</div>
+            <div class="grid-item">1fr</div>
+            <div class="grid-item">minmax<br>100-200px</div>
+        </div>
+
+        <div class="code-block">
+            <h4>CSS:</h4>
+            <pre><code>/* Fixed + flexible + auto */
+.mix-1 {
+    grid-template-columns: 250px 1fr auto;
+}
+
+/* Fixed + repeat + minmax */
+.mix-2 {
+    grid-template-columns: 200px repeat(2, 1fr) minmax(100px, 200px);
+}</code></pre>
+        </div>
+
+        <div class="explanation">
+            <p>✅ <strong>Kapan pakai apa?</strong></p>
+            <ul style="color: #c8e6c9; padding-left: 20px; margin-top: 8px;">
+                <li><code>px</code> — untuk bagian yang harus ukuran tetap (sidebar, icon column)</li>
+                <li><code>fr</code> — untuk bagian yang harus fleksibel (konten utama)</li>
+                <li><code>auto</code> — untuk bagian yang menyesuaikan kontennya</li>
+                <li><code>minmax()</code> — untuk bagian yang butuh batas min/max</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- RINGKASAN -->
+    <section class="summary-section">
+        <h2>📝 Ringkasan</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Unit/Fungsi</th>
+                    <th>Cara Kerja</th>
+                    <th>Contoh</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>fr</code></td>
+                    <td>Membagi ruang sisa proporsional</td>
+                    <td><code>1fr 2fr 1fr</code></td>
+                </tr>
+                <tr>
+                    <td><code>repeat()</code></td>
+                    <td>Mengulang pola kolom/baris</td>
+                    <td><code>repeat(3, 1fr)</code></td>
+                </tr>
+                <tr>
+                    <td><code>minmax()</code></td>
+                    <td>Batas min & max</td>
+                    <td><code>minmax(200px, 1fr)</code></td>
+                </tr>
+                <tr>
+                    <td><code>auto</code></td>
+                    <td>Menyesuaikan konten</td>
+                    <td><code>200px auto 1fr</code></td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <div class="nav-buttons">
+        <a href="../grid-basics/" class="btn-prev">← Sebelumnya: Grid Basics</a>
+        <a href="../grid-placement/" class="btn-next">Selanjutnya: Grid Placement →</a>
+    </div>
+</body>
+
+</html>

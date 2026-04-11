@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grid Areas — Layout dengan Named Areas</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <a href="../../../index.html" class="back-link">← Kembali ke Daftar Exercise</a>
+
+    <header class="page-header">
+        <h1>🗺️ Grid Areas</h1>
+        <p class="subtitle">Membuat layout dengan <code>grid-template-areas</code> — cara paling mudah dibaca!</p>
+    </header>
+
+    <!-- TEORI -->
+    <section class="theory">
+        <h2>📖 Apa itu Grid Template Areas?</h2>
+        <p><code>grid-template-areas</code> memungkinkan kamu membuat layout dengan menulis <strong>"peta visual"</strong> langsung di CSS. Ini cara paling intuitif untuk membuat layout — kamu benar-benar menggambar layout-nya!</p>
+
+        <div class="concept-box">
+            <h3>Cara Kerjanya</h3>
+            <ol>
+                <li>Beri nama setiap area di container: <code>grid-template-areas</code></li>
+                <li>Assign setiap item ke area-nya: <code>grid-area: nama</code></li>
+                <li>Gunakan <code>.</code> (titik) untuk sel kosong</li>
+            </ol>
+        </div>
+
+        <div class="concept-box analogy">
+            <h3>🎯 Analogi</h3>
+            <p>Bayangkan kamu sedang <strong>menggambar denah rumah</strong> di kertas kotak-kotak. Kamu tulis "dapur" di beberapa kotak, "kamar" di beberapa kotak lain. Grid Areas bekerja persis seperti itu!</p>
+        </div>
+    </section>
+
+    <!-- DEMO 1: Layout Dasar -->
+    <section class="demo-section">
+        <h2>🎯 Demo 1: Layout Dasar dengan grid-template-areas</h2>
+        <p>Layout klasik: Header di atas, Sidebar kiri, Konten utama kanan, Footer bawah.</p>
+
+        <div class="demo-container grid-areas-1">
+            <div class="grid-item area-header">Header</div>
+            <div class="grid-item area-sidebar">Sidebar</div>
+            <div class="grid-item area-main">Main Content</div>
+            <div class="grid-item area-footer">Footer</div>
+        </div>
+
+        <div class="code-block">
+            <h4>CSS:</h4>
+            <pre><code>.container {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    grid-template-rows: 60px 1fr 50px;
+    grid-template-areas:
+        "header  header"
+        "sidebar main"
+        "footer  footer";
+    gap: 10px;
+    height: 400px;
+}
+
+.header  { grid-area: header; }
+.sidebar { grid-area: sidebar; }
+.main    { grid-area: main; }
+.footer  { grid-area: footer; }</code></pre>
+        </div>
+
+        <div class="explanation">
+            <p>✅ <strong>Lihat betapa mudahnya dibaca!</strong> Baris pertama: "header header" = header menempati 2 kolom. Baris kedua: "sidebar main" = sidebar kiri, main kanan. Baris ketiga: "footer footer" = footer penuh.</p>
+        </div>
+    </section>
+
+    <!-- DEMO 2: Sel Kosong -->
+    <section class="demo-section">
+        <h2>🎯 Demo 2: Sel Kosong dengan Titik (.)</h2>
+        <p>Gunakan <code>.</code> untuk membuat sel yang kosong (tidak ditempati area apapun).</p>
+
+        <div class="demo-container grid-areas-2">
+            <div class="grid-item area2-nav">Nav</div>
+            <div class="grid-item area2-main">Main</div>
+            <div class="grid-item area2-ads">Ads</div>
+            <div class="grid-item area2-footer">Footer</div>
+        </div>
+
+        <div class="code-block">
+            <h4>CSS:</h4>
+            <pre><code>.container {
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr;
+    grid-template-rows: 60px 1fr 50px;
+    grid-template-areas:
+        "nav   nav   nav"
+        ".     main  ads"
+        "footer footer footer";
+    gap: 10px;
+}
+
+/* Perhatikan titik (.) di baris kedua kolom pertama!
+   Itu akan menjadi sel kosong. */</code></pre>
+        </div>
+
+        <div class="explanation">
+            <p>✅ <strong>Penjelasan:</strong> Di baris kedua, kolom pertama punya <code>.</code> — artinya sel itu tidak ditempati siapapun. Sangat berguna untuk layout yang tidak simetris!</p>
+        </div>
+    </section>
+
+    <!-- DEMO 3: Layout Majalah -->
+    <section class="demo-section">
+        <h2>🎯 Demo 3: Layout Majalah</h2>
+        <p>Grid Areas sangat cocok untuk layout yang kompleks tapi tetap mudah dibaca.</p>
+
+        <div class="demo-container grid-areas-3">
+            <div class="grid-item area3-title">Judul Artikel</div>
+            <div class="grid-item area3-featured">Gambar Utama</div>
+            <div class="grid-item area3-story1">Cerita 1</div>
+            <div class="grid-item area3-story2">Cerita 2</div>
+            <div class="grid-item area3-story3">Cerita 3</div>
+            <div class="grid-item area3-ad">Iklan</div>
+        </div>
+
+        <div class="code-block">
+            <h4>CSS:</h4>
+            <pre><code>.container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto 200px 150px;
+    grid-template-areas:
+        "title    title    title"
+        "featured featured ad"
+        "story1   story2   story3";
+    gap: 10px;
+}</code></pre>
+        </div>
+
+        <div class="explanation">
+            <p>✅ <strong>Kelebihan grid-template-areas:</strong> Mudah diubah layout-nya! Mau pindahkan iklan ke kiri? Tinggal edit teks areas-nya — tidak perlu hitung ulang nomor garis.</p>
+        </div>
+    </section>
+
+    <!-- RINGKASAN -->
+    <section class="summary-section">
+        <h2>📝 Ringkasan</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Property</th>
+                    <th>Dipakai Di</th>
+                    <th>Fungsi</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>grid-template-areas</code></td>
+                    <td>Container</td>
+                    <td>Menggambar "peta" layout</td>
+                </tr>
+                <tr>
+                    <td><code>grid-area</code></td>
+                    <td>Item</td>
+                    <td>Me-assign item ke area</td>
+                </tr>
+                <tr>
+                    <td><code>.</code> (titik)</td>
+                    <td>Di dalam areas</td>
+                    <td>Sel kosong</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="concept-box" style="margin-top: 20px;">
+            <h3>⚠️ Aturan Penting</h3>
+            <ul>
+                <li>Setiap area harus berbentuk <strong>persegi panjang</strong> (tidak boleh L-shape)</li>
+                <li>Nama area tidak boleh ada spasi — gunakan camelCase atau dash</li>
+                <li>Jumlah nama per baris harus sama dengan jumlah kolom</li>
+            </ul>
+        </div>
+    </section>
+
+    <div class="nav-buttons">
+        <a href="../grid-placement/" class="btn-prev">← Sebelumnya: Grid Placement</a>
+        <a href="../grid-alignment/" class="btn-next">Selanjutnya: Grid Alignment →</a>
+    </div>
+</body>
+
+</html>
